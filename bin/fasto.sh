@@ -16,5 +16,3 @@ fi
 dotnet --version &> /dev/null || (echo "Could not find dotnet" && exit 1)
 
 dotnet $FASTO "$@"
-
-
