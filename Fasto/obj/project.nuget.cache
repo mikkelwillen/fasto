@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "H6l3CeHsRrsTpjB2mSCggISu8nsCwg5KmoYzPn29CUUbXEzRlC0dymfMFIoEPhjVgnQk5it3bvRNvuOcLJ+MFQ==",
+  "success": true,
+  "projectFilePath": "/home/mikkel/Dokumenter/fasto/Fasto/Fasto.fsproj",
+  "expectedPackageFiles": [
+    "/home/mikkel/.nuget/packages/fsharp.core/6.0.2/fsharp.core.6.0.2.nupkg.sha512",
+    "/home/mikkel/.nuget/packages/fslexyacc/10.2.0/fslexyacc.10.2.0.nupkg.sha512",
+    "/home/mikkel/.nuget/packages/fslexyacc.runtime/10.2.0/fslexyacc.runtime.10.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}
