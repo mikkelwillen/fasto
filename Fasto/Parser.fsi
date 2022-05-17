@@ -21,6 +21,12 @@ type token =
   | REDUCE of (Position)
   | IOTA of (Position)
   | ARROW of (Position)
+  | AND of (Position)
+  | OR of (Position)
+  | NOT of (Position)
+  | NEGATE of (Position)
+  | TIMES of (Position)
+  | DIVIDE of (Position)
   | PLUS of (Position)
   | MINUS of (Position)
   | LESS of (Position)
@@ -35,6 +41,7 @@ type token =
   | EOF of (Position)
   | ID of (string * Position)
   | STRINGLIT of (string * Position)
+  | BOOLLIT of (bool * Position)
   | CHARLIT of (char * Position)
   | NUM of (int * Position)
 type tokenId = 
@@ -58,6 +65,12 @@ type tokenId =
     | TOKEN_REDUCE
     | TOKEN_IOTA
     | TOKEN_ARROW
+    | TOKEN_AND
+    | TOKEN_OR
+    | TOKEN_NOT
+    | TOKEN_NEGATE
+    | TOKEN_TIMES
+    | TOKEN_DIVIDE
     | TOKEN_PLUS
     | TOKEN_MINUS
     | TOKEN_LESS
@@ -72,6 +85,7 @@ type tokenId =
     | TOKEN_EOF
     | TOKEN_ID
     | TOKEN_STRINGLIT
+    | TOKEN_BOOLLIT
     | TOKEN_CHARLIT
     | TOKEN_NUM
     | TOKEN_end_of_input

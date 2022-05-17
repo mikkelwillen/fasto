@@ -38,17 +38,28 @@ let parse_error_rich =
 
 %token <int * Position> NUM
 %token <char * Position> CHARLIT
+%token <bool * Position> BOOLLIT
 %token <string * Position> ID STRINGLIT
 %token <Position> IF THEN ELSE LET IN EOF
 %token <Position> INT CHAR BOOL
 %token <Position> PLUS MINUS LESS
+%token <Position> TIMES DIVIDE
+%token <Position> NEGATE
+%token <Position> NOT
+%token <Position> OR
+%token <Position> AND
 %token <Position> DEQ LTH EQ OP MAP REDUCE IOTA ARROW
 %token <Position> FUN FN COMMA SEMICOLON READ WRITE
 %token <Position> LPAR RPAR LBRACKET RBRACKET LCURLY RCURLY
 
 %nonassoc ifprec letprec
-%left DEQ LTH
 %left PLUS MINUS
+%left TIMES DIVIDE
+%left OR
+%left AND
+%left DEQ LTH
+%left NOT
+%left NEGATE
 
 %start Prog
 %type <AbSyn.UntypedProg> Prog
@@ -102,14 +113,21 @@ BinOp : PLUS  { (Lambda
 
 Exp : NUM            { Constant (IntVal (fst $1), snd $1) }
     | CHARLIT        { Constant (CharVal (fst $1), snd $1) }
+    | BOOLLIT        { Constant (BoolVal (fst $1), snd $1) }
     | ID             { Var $1 }
+    | NOT Exp        { Not ($2, $1) }
     | STRINGLIT      { StringLit $1 }
+    | NEGATE Exp     { Negate ($2, $1) }
     | LCURLY Exps RCURLY
                      { ArrayLit ($2, (), $1) }
     | Exp PLUS  Exp  { Plus ($1, $3, $2) }
     | Exp MINUS Exp  { Minus($1, $3, $2) }
     | Exp DEQ   Exp  { Equal($1, $3, $2) }
     | Exp LTH   Exp  { Less ($1, $3, $2) }
+    | Exp OR    Exp  { Or   ($1, $3, $2) }
+    | Exp AND   Exp  { And  ($1, $3, $2) }
+    | Exp TIMES Exp  { Times($1, $3, $2) }
+    | Exp DIVIDE Exp { Divide($1, $3, $2) }
     | IF Exp THEN Exp ELSE Exp %prec ifprec
                      { If ($2, $4, $6, $1) }
     | ID LPAR Exps RPAR

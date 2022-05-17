@@ -63,6 +63,7 @@ let keyword (s, pos) =
        | "fun"          -> Parser.FUN pos
        | "fn"           -> Parser.FN pos
        | "op"           -> Parser.OP pos
+       | "not"          -> Parser.NOT pos
 
 (* specials: *)
        | "iota"         -> Parser.IOTA pos
@@ -82,10 +83,20 @@ rule Token = parse
                             Token lexbuf } (* newlines *)
   | "//" [^ '\n' '\012']* { Token lexbuf } (* comment *)
 
-  | '0' | ['1'-'9']['0'-'9']* { Parser.NUM
+  | '0' | ['1'-'9']['0'-'9']* 
+                          { Parser.NUM
                                   ( int (Encoding.UTF8.GetString(lexbuf.Lexeme))
                                   , getPos lexbuf )
-                              }
+                          }
+  | "true"                { Parser.BOOLLIT 
+                                  ( true
+                                  , getPos lexbuf )
+                          }
+  | "false"               { Parser.BOOLLIT 
+                                  ( false
+                                  , getPos lexbuf )
+                          }
+
   | ['a'-'z' 'A'-'Z']['a'-'z' 'A'-'Z' '0'-'9' '_']*
                           { keyword ( Encoding.UTF8.GetString(lexbuf.Lexeme)
                                     , getPos lexbuf ) }
@@ -101,18 +112,24 @@ rule Token = parse
                             let str1 = str0.Substring (1, (String.length str0) - 2)
                             Parser.STRINGLIT (AbSyn.fromCString str1, getPos lexbuf)
                           }
-  | '+'                   { Parser.PLUS   (getPos lexbuf) }
-  | '-'                   { Parser.MINUS  (getPos lexbuf) }
-  | "=>"                  { Parser.ARROW  (getPos lexbuf) }
-  | "=="                  { Parser.DEQ    (getPos lexbuf) }
-  | '='                   { Parser.EQ     (getPos lexbuf) }
-  | '<'                   { Parser.LTH    (getPos lexbuf) }
-  | '('                   { Parser.LPAR   (getPos lexbuf) }
-  | ')'                   { Parser.RPAR   (getPos lexbuf) }
+  | '+'                   { Parser.PLUS     (getPos lexbuf) }
+  | '-'                   { Parser.MINUS    (getPos lexbuf) }
+  | '*'                   { Parser.TIMES    (getPos lexbuf) }
+  | '/'                   { Parser.DIVIDE   (getPos lexbuf) }
+  | '~'                   { Parser.NEGATE   (getPos lexbuf) }
+  | "=>"                  { Parser.ARROW    (getPos lexbuf) }
+  | "=="                  { Parser.DEQ      (getPos lexbuf) }
+  | "&&"                  { Parser.AND      (getPos lexbuf) }
+  | "||"                  { Parser.OR       (getPos lexbuf) }
+  | '='                   { Parser.EQ       (getPos lexbuf) }
+  | '<'                   { Parser.LTH      (getPos lexbuf) }
+  | '('                   { Parser.LPAR     (getPos lexbuf) }
+  | ')'                   { Parser.RPAR     (getPos lexbuf) }
   | '['                   { Parser.LBRACKET (getPos lexbuf) }
   | ']'                   { Parser.RBRACKET (getPos lexbuf) }
-  | '{'                   { Parser.LCURLY (getPos lexbuf) }
-  | '}'                   { Parser.RCURLY (getPos lexbuf) }
-  | ','                   { Parser.COMMA  (getPos lexbuf) }
-  | eof                   { Parser.EOF    (getPos lexbuf) }
+  | '{'                   { Parser.LCURLY   (getPos lexbuf) }
+  | '}'                   { Parser.RCURLY   (getPos lexbuf) }
+  | ','                   { Parser.COMMA    (getPos lexbuf) }
+  | ';'                   { Parser.SEMICOLON(getPos lexbuf) }
+  | eof                   { Parser.EOF      (getPos lexbuf) }
   | _                     { lexerError lexbuf "Illegal symbol in input" }
