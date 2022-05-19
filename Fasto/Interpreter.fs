@@ -157,8 +157,8 @@ let rec evalExp (e : UntypedExp, vtab : VarTable, ftab : FunTable) : Value =
         match (res1, res2) with
           | (IntVal n1, IntVal n2) -> 
             match n2 with
-            | 0 -> raise (MyError("Divide by zero", expPos e2))
-            | _ -> IntVal (n1/n2)
+              | 0 -> raise (MyError("Divide by zero", expPos e2))
+              | _ -> IntVal (n1/n2)
           | (IntVal _, _) -> reportWrongType "right operand of /" Int res2 (expPos e2)
           | (_, _) -> reportWrongType "left operand of /" Int res1 (expPos e1)
   | And (e1, e2, pos) ->
@@ -168,7 +168,7 @@ let rec evalExp (e : UntypedExp, vtab : VarTable, ftab : FunTable) : Value =
           | (BoolVal b1, BoolVal b2) ->
             match b1 with
               | true -> 
-                  match b2 with
+                match b2 with
                   | true -> BoolVal true
                   | _ -> BoolVal false
               | _ -> BoolVal false
@@ -181,7 +181,8 @@ let rec evalExp (e : UntypedExp, vtab : VarTable, ftab : FunTable) : Value =
           | (BoolVal b1, BoolVal b2) ->
             match b1 with
               | true -> BoolVal true
-              | _ -> match b2 with
+              | _ -> 
+                match b2 with
                   | true -> BoolVal true
                   | _ -> BoolVal false
           | (BoolVal _, _) -> reportWrongType "right operand of ||" Bool res2 (expPos e2)

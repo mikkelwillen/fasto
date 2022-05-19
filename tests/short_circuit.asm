@@ -31,42 +31,67 @@ no_way:
 # Function main
 main:
 	sw	$31, -4($29)
-	addi	$29, $29, -8
-	ori	$3, $0, 0
-# was:	ori	_tmp_4_, $0, 0
-# 	ori	_letBind_3_,_tmp_4_,0
-	la	$2, _true
-# was:	la	$2, _true
-	bne	$3, $0, _wBoolF_5_
-# was:	bne	_letBind_3_, $0, _wBoolF_5_
-	la	$2, _false
-# was:	la	$2, _false
-_wBoolF_5_:
-	jal	putstring
-# was:	jal	putstring, $2
-	ori	$3, $0, 1
-# was:	ori	_tmp_7_, $0, 1
-	bne	$3, $0, _endLabel_8_
-# was:	bne	_tmp_7_, $0, _endLabel_8_
+	sw	$16, -8($29)
+	addi	$29, $29, -12
+	ori	$16, $0, 0
+# was:	ori	_And_L_5_, $0, 0
 	jal	no_way
 # was:	jal	no_way, 
 	ori	$3, $2, 0
-# was:	ori	_tmp_7_, $2, 0
-_endLabel_8_:
-# 	ori	_letBind_6_,_tmp_7_,0
+# was:	ori	_And_R_6_, $2, 0
+	ori	$4, $0, 0
+# was:	ori	_falseReg_7_, $0, 0
+	ori	$2, $0, 0
+# was:	ori	_tmp_4_, $0, 0
+	beq	$16, $4, _false_8_
+# was:	beq	_And_L_5_, _falseReg_7_, _false_8_
+	beq	$3, $4, _false_8_
+# was:	beq	_And_R_6_, _falseReg_7_, _false_8_
+	ori	$2, $0, 1
+# was:	ori	_tmp_4_, $0, 1
+_false_8_:
+	ori	$3, $2, 0
+# was:	ori	_letBind_3_, _tmp_4_, 0
 	la	$2, _true
 # was:	la	$2, _true
 	bne	$3, $0, _wBoolF_9_
-# was:	bne	_letBind_6_, $0, _wBoolF_9_
+# was:	bne	_letBind_3_, $0, _wBoolF_9_
 	la	$2, _false
 # was:	la	$2, _false
 _wBoolF_9_:
 	jal	putstring
 # was:	jal	putstring, $2
+	ori	$16, $0, 1
+# was:	ori	_Or_L_12_, $0, 1
+	jal	no_way
+# was:	jal	no_way, 
+# 	ori	_Or_R_13_,$2,0
+	ori	$3, $0, 1
+# was:	ori	_trueReg_14_, $0, 1
+	ori	$4, $0, 1
+# was:	ori	_tmp_11_, $0, 1
+	beq	$16, $3, _true_15_
+# was:	beq	_Or_L_12_, _trueReg_14_, _true_15_
+	beq	$2, $3, _true_15_
+# was:	beq	_Or_R_13_, _trueReg_14_, _true_15_
+	ori	$4, $0, 0
+# was:	ori	_tmp_11_, $0, 0
+_true_15_:
+# 	ori	_letBind_10_,_tmp_11_,0
+	la	$2, _true
+# was:	la	$2, _true
+	bne	$4, $0, _wBoolF_16_
+# was:	bne	_letBind_10_, $0, _wBoolF_16_
+	la	$2, _false
+# was:	la	$2, _false
+_wBoolF_16_:
+	jal	putstring
+# was:	jal	putstring, $2
 	ori	$2, $0, 1
 # was:	ori	_mainres_2_, $0, 1
 # 	ori	$2,_mainres_2_,0
-	addi	$29, $29, 8
+	addi	$29, $29, 12
+	lw	$16, -8($29)
 	lw	$31, -4($29)
 	jr	$31
 ord:

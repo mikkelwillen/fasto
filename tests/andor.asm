@@ -22,30 +22,60 @@ main:
 	sw	$31, -4($29)
 	sw	$16, -8($29)
 	addi	$29, $29, -12
-	jal	getint
-# was:	jal	getint, $2
-# 	ori	_letBind_2_,$2,0
+	ori	$16, $0, 1
+# was:	ori	_letBind_2_, $0, 1
+	ori	$3, $0, 0
+# was:	ori	_And_L_5_, $0, 0
+# 	ori	_And_R_6_,_letBind_2_,0
+	ori	$4, $0, 0
+# was:	ori	_falseReg_7_, $0, 0
+	ori	$2, $0, 0
+# was:	ori	_tmp_4_, $0, 0
+	beq	$3, $4, _false_8_
+# was:	beq	_And_L_5_, _falseReg_7_, _false_8_
+	beq	$16, $4, _false_8_
+# was:	beq	_And_R_6_, _falseReg_7_, _false_8_
+	ori	$2, $0, 1
+# was:	ori	_tmp_4_, $0, 1
+_false_8_:
 	ori	$3, $2, 0
-# was:	ori	_plus_L_4_, _letBind_2_, 0
-# 	ori	_plus_R_5_,_letBind_2_,0
-	add	$3, $3, $2
-# was:	add	_letBind_3_, _plus_L_4_, _plus_R_5_
-# 	ori	_minus_L_7_,_letBind_3_,0
+# was:	ori	_letBind_3_, _tmp_4_, 0
+	la	$2, _true
+# was:	la	$2, _true
+	bne	$3, $0, _wBoolF_9_
+# was:	bne	_letBind_3_, $0, _wBoolF_9_
+	la	$2, _false
+# was:	la	$2, _false
+_wBoolF_9_:
+	jal	putstring
+# was:	jal	putstring, $2
+	ori	$2, $0, 1
+# was:	ori	_Or_L_12_, $0, 1
+# 	ori	_Or_R_13_,_letBind_2_,0
 	ori	$4, $0, 1
-# was:	ori	_minus_R_8_, $0, 1
-	sub	$3, $3, $4
-# was:	sub	_letBind_6_, _minus_L_7_, _minus_R_8_
-# 	ori	_times_L_10_,_letBind_2_,0
-# 	ori	_times_R_11_,_letBind_6_,0
-	mul	$16, $2, $3
-# was:	mul	_tmp_9_, _times_L_10_, _times_R_11_
-# 	ori	_mainres_1_,_tmp_9_,0
-	ori	$2, $16, 0
-# was:	ori	$2, _mainres_1_, 0
-	jal	putint
-# was:	jal	putint, $2
-	ori	$2, $16, 0
-# was:	ori	$2, _mainres_1_, 0
+# was:	ori	_trueReg_14_, $0, 1
+	ori	$3, $0, 1
+# was:	ori	_tmp_11_, $0, 1
+	beq	$2, $4, _true_15_
+# was:	beq	_Or_L_12_, _trueReg_14_, _true_15_
+	beq	$16, $4, _true_15_
+# was:	beq	_Or_R_13_, _trueReg_14_, _true_15_
+	ori	$3, $0, 0
+# was:	ori	_tmp_11_, $0, 0
+_true_15_:
+# 	ori	_letBind_10_,_tmp_11_,0
+	la	$2, _true
+# was:	la	$2, _true
+	bne	$3, $0, _wBoolF_16_
+# was:	bne	_letBind_10_, $0, _wBoolF_16_
+	la	$2, _false
+# was:	la	$2, _false
+_wBoolF_16_:
+	jal	putstring
+# was:	jal	putstring, $2
+	ori	$2, $0, 1
+# was:	ori	_mainres_1_, $0, 1
+# 	ori	$2,_mainres_1_,0
 	addi	$29, $29, 12
 	lw	$16, -8($29)
 	lw	$31, -4($29)

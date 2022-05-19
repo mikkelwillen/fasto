@@ -196,9 +196,9 @@ let rec compileExp  (e      : TypedExp)
   | Constant (BoolVal p, pos) ->
       (* TODO project task 1: represent `true`/`false` values as `1`/`0` *)
       if p = true then
-          [ Mips.LI (place, int 1) ]
+          [ Mips.LI (place, 1) ]
       else
-          [ Mips.LI (place, int 0) ]
+          [ Mips.LI (place, 0) ]
   | Constant (CharVal c, pos) -> [ Mips.LI (place, int c) ]
 
   (* Create/return a label here, collect all string literals of the program
@@ -406,11 +406,37 @@ let rec compileExp  (e      : TypedExp)
         in `e1 || e2` if the execution of `e1` will evaluate to `true` then
         the code of `e2` must not be executed. Similarly for `And` (&&).
   *)
-  | And (_, _, _) ->
-      failwith "Unimplemented code generation of &&"
+  | And (e1, e2, pos) ->
+      let t1 = newReg "And_L"
+      let t2 = newReg "And_R"
+      let t3 = newReg "falseReg"
+      let code1 = compileExp e1 vtable t1
+      let code2 = compileExp e2 vtable t2
+      let code3 = compileExp (Constant (IntVal 0, pos)) vtable t3
+      let falseLabel = newLab "false"
+      code1 @ code2 @ code3 @
+      [ Mips.LI (place, 0);
+        Mips.BEQ(t1, t3, falseLabel);
+        Mips.BEQ(t2, t3, falseLabel);
+        Mips.LI (place, 1);
+        Mips.LABEL falseLabel
+      ]
 
-  | Or (_, _, _) ->
-      failwith "Unimplemented code generation of ||"
+  | Or (e1, e2, pos) ->
+      let t1 = newReg "Or_L"
+      let t2 = newReg "Or_R"
+      let t3 = newReg "trueReg"
+      let code1 = compileExp e1 vtable t1
+      let code2 = compileExp e2 vtable t2
+      let code3 = compileExp (Constant (IntVal 1, pos)) vtable t3
+      let trueLabel = newLab "true"
+      code1 @ code2 @ code3 @
+      [ Mips.LI (place, 1);
+        Mips.BEQ(t1, t3, trueLabel);
+        Mips.BEQ(t2, t3, trueLabel);
+        Mips.LI (place, 0);
+        Mips.LABEL trueLabel
+      ]
 
   (* Indexing:
      1. generate code to compute the index

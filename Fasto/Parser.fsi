@@ -100,6 +100,8 @@ type nonTerminalId =
     | NONTERM_BinOp
     | NONTERM_Exp
     | NONTERM_Exps
+    | NONTERM_Decl
+    | NONTERM_Decls
     | NONTERM_FunArg
 /// This function maps tokens to integer indexes
 val tagOfToken: token -> int
