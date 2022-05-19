@@ -23,69 +23,83 @@ main:
 	sw	$16, -8($29)
 	addi	$29, $29, -12
 	ori	$3, $0, 40
-# was:	ori	_size_reg_3_, $0, 40
-	bgez	$3, _safe_lab_4_
-# was:	bgez	_size_reg_3_, _safe_lab_4_
+# was:	ori	_letBind_2_, $0, 40
+# 	ori	_size_reg_4_,_letBind_2_,0
+	bgez	$3, _safe_lab_5_
+# was:	bgez	_size_reg_4_, _safe_lab_5_
 	ori	$5, $0, 3
 # was:	ori	$5, $0, 3
 	la	$6, _Msg_IllegalArraySize_
 # was:	la	$6, _Msg_IllegalArraySize_
 	j	_RuntimeError_
-_safe_lab_4_:
+_safe_lab_5_:
 	ori	$2, $28, 0
-# was:	ori	_letBind_2_, $28, 0
+# was:	ori	_letBind_3_, $28, 0
 	sll	$4, $3, 2
-# was:	sll	_tmp_10_, _size_reg_3_, 2
+# was:	sll	_tmp_11_, _size_reg_4_, 2
 	addi	$4, $4, 4
-# was:	addi	_tmp_10_, _tmp_10_, 4
+# was:	addi	_tmp_11_, _tmp_11_, 4
 	add	$28, $28, $4
-# was:	add	$28, $28, _tmp_10_
+# was:	add	$28, $28, _tmp_11_
 	sw	$3, 0($2)
-# was:	sw	_size_reg_3_, 0(_letBind_2_)
+# was:	sw	_size_reg_4_, 0(_letBind_3_)
 	addi	$6, $2, 4
-# was:	addi	_addr_reg_5_, _letBind_2_, 4
-	ori	$5, $0, 0
-# was:	ori	_i_reg_6_, $0, 0
-_loop_beg_7_:
-	sub	$4, $5, $3
-# was:	sub	_tmp_reg_9_, _i_reg_6_, _size_reg_3_
-	bgez	$4, _loop_end_8_
-# was:	bgez	_tmp_reg_9_, _loop_end_8_
-	sw	$5, 0($6)
-# was:	sw	_i_reg_6_, 0(_addr_reg_5_)
+# was:	addi	_addr_reg_6_, _letBind_3_, 4
+	ori	$4, $0, 0
+# was:	ori	_i_reg_7_, $0, 0
+_loop_beg_8_:
+	sub	$5, $4, $3
+# was:	sub	_tmp_reg_10_, _i_reg_7_, _size_reg_4_
+	bgez	$5, _loop_end_9_
+# was:	bgez	_tmp_reg_10_, _loop_end_9_
+	sw	$4, 0($6)
+# was:	sw	_i_reg_7_, 0(_addr_reg_6_)
 	addi	$6, $6, 4
-# was:	addi	_addr_reg_5_, _addr_reg_5_, 4
-	addi	$5, $5, 1
-# was:	addi	_i_reg_6_, _i_reg_6_, 1
-	j	_loop_beg_7_
-_loop_end_8_:
-	ori	$4, $0, 4
-# was:	ori	_arr_ind_12_, $0, 4
+# was:	addi	_addr_reg_6_, _addr_reg_6_, 4
+	addi	$4, $4, 1
+# was:	addi	_i_reg_7_, _i_reg_7_, 1
+	j	_loop_beg_8_
+_loop_end_9_:
+	ori	$4, $3, 0
+# was:	ori	_divide_L_13_, _letBind_2_, 0
+	ori	$3, $0, 10
+# was:	ori	_divide_R_14_, $0, 10
+	div	$4, $4, $3
+# was:	div	_letBind_12_, _divide_L_13_, _divide_R_14_
+# 	ori	_arr_ind_16_,_letBind_12_,0
 	addi	$3, $2, 4
-# was:	addi	_arr_reg_13_, _letBind_2_, 4
+# was:	addi	_arr_reg_17_, _letBind_3_, 4
 	lw	$2, 0($2)
-# was:	lw	_size_reg_14_, 0(_letBind_2_)
-	bgez	$4, _safe_lab_17_
-# was:	bgez	_arr_ind_12_, _safe_lab_17_
-_error_lab_16_:
+# was:	lw	_size_reg_18_, 0(_letBind_3_)
+	bgez	$4, _safe_lab_21_
+# was:	bgez	_arr_ind_16_, _safe_lab_21_
+_error_lab_20_:
 	ori	$5, $0, 5
 # was:	ori	$5, $0, 5
 	la	$6, _Msg_IllegalIndex_
 # was:	la	$6, _Msg_IllegalIndex_
 	j	_RuntimeError_
-_safe_lab_17_:
+_safe_lab_21_:
 	sub	$2, $4, $2
-# was:	sub	_tmp_reg_15_, _arr_ind_12_, _size_reg_14_
-	bgez	$2, _error_lab_16_
-# was:	bgez	_tmp_reg_15_, _error_lab_16_
+# was:	sub	_tmp_reg_19_, _arr_ind_16_, _size_reg_18_
+	bgez	$2, _error_lab_20_
+# was:	bgez	_tmp_reg_19_, _error_lab_20_
 	sll	$4, $4, 2
-# was:	sll	_arr_ind_12_, _arr_ind_12_, 2
+# was:	sll	_arr_ind_16_, _arr_ind_16_, 2
 	add	$3, $3, $4
-# was:	add	_arr_reg_13_, _arr_reg_13_, _arr_ind_12_
-	lw	$16, 0($3)
-# was:	lw	_letBind_11_, 0(_arr_reg_13_)
-# 	ori	_tmp_18_,_letBind_11_,0
-# 	ori	_mainres_1_,_tmp_18_,0
+# was:	add	_arr_reg_17_, _arr_reg_17_, _arr_ind_16_
+	lw	$3, 0($3)
+# was:	lw	_letBind_15_, 0(_arr_reg_17_)
+# 	ori	_times_L_25_,_letBind_15_,0
+	ori	$2, $0, 1
+# was:	ori	_times_R_26_, $0, 1
+	mul	$2, $3, $2
+# was:	mul	_plus_L_23_, _times_L_25_, _times_R_26_
+	ori	$3, $0, 0
+# was:	ori	_plus_R_24_, $0, 0
+	add	$16, $2, $3
+# was:	add	_tmp_22_, _plus_L_23_, _plus_R_24_
+# 	ori	_mainres_1_,_tmp_22_,0
 	ori	$2, $16, 0
 # was:	ori	$2, _mainres_1_, 0
 	jal	putint

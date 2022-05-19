@@ -17,27 +17,101 @@
 _stop_:
 	ori	$2, $0, 10
 	syscall
+# Function f
+f:
+	sw	$31, -4($29)
+	addi	$29, $29, -8
+# 	ori	_param_a_1_,$2,0
+# 	ori	_param_b_2_,$3,0
+# 	ori	_param_c_3_,$4,0
+# 	ori	_param_d_4_,$5,0
+	ori	$6, $0, 1000
+# was:	ori	_times_L_12_, $0, 1000
+# 	ori	_times_R_13_,_param_a_1_,0
+	mul	$2, $6, $2
+# was:	mul	_plus_L_10_, _times_L_12_, _times_R_13_
+	ori	$6, $0, 100
+# was:	ori	_times_L_14_, $0, 100
+# 	ori	_times_R_15_,_param_b_2_,0
+	mul	$3, $6, $3
+# was:	mul	_plus_R_11_, _times_L_14_, _times_R_15_
+	add	$2, $2, $3
+# was:	add	_plus_L_8_, _plus_L_10_, _plus_R_11_
+	ori	$3, $0, 10
+# was:	ori	_times_L_16_, $0, 10
+# 	ori	_times_R_17_,_param_c_3_,0
+	mul	$3, $3, $4
+# was:	mul	_plus_R_9_, _times_L_16_, _times_R_17_
+	add	$2, $2, $3
+# was:	add	_plus_L_6_, _plus_L_8_, _plus_R_9_
+# 	ori	_plus_R_7_,_param_d_4_,0
+	add	$2, $2, $5
+# was:	add	_fres_5_, _plus_L_6_, _plus_R_7_
+# 	ori	$2,_fres_5_,0
+	addi	$29, $29, 8
+	lw	$31, -4($29)
+	jr	$31
 # Function zero
 zero:
 	sw	$31, -4($29)
 	addi	$29, $29, -8
-# 	ori	_param_b_1_,$2,0
-# 	ori	_cond_6_,_param_b_1_,0
-	bne	$2, $0, _then_3_
-# was:	bne	_cond_6_, $0, _then_3_
-	j	_else_4_
-_then_3_:
+# 	ori	_param_b_18_,$2,0
+# 	ori	_cond_23_,_param_b_18_,0
+	bne	$2, $0, _then_20_
+# was:	bne	_cond_23_, $0, _then_20_
+	j	_else_21_
+_then_20_:
 	ori	$2, $0, 0
-# was:	ori	_zerores_2_, $0, 0
-	j	_endif_5_
-_else_4_:
-# 	ori	_arg_7_,_param_b_1_,0
-# 	ori	$2,_arg_7_,0
+# was:	ori	_zerores_19_, $0, 0
+	j	_endif_22_
+_else_21_:
+# 	ori	_arg_24_,_param_b_18_,0
+# 	ori	$2,_arg_24_,0
 	jal	zero
 # was:	jal	zero, $2
-# 	ori	_zerores_2_,$2,0
-_endif_5_:
-# 	ori	$2,_zerores_2_,0
+# 	ori	_zerores_19_,$2,0
+_endif_22_:
+# 	ori	$2,_zerores_19_,0
+	addi	$29, $29, 8
+	lw	$31, -4($29)
+	jr	$31
+# Function test
+test:
+	sw	$31, -4($29)
+	addi	$29, $29, -8
+# 	ori	_param_z_25_,$2,0
+	ori	$3, $0, 1
+# was:	ori	_plus_L_28_, $0, 1
+# 	ori	_plus_R_29_,_param_z_25_,0
+	add	$3, $3, $2
+# was:	add	_letBind_27_, _plus_L_28_, _plus_R_29_
+	ori	$4, $0, 2
+# was:	ori	_plus_L_31_, $0, 2
+# 	ori	_plus_R_32_,_param_z_25_,0
+	add	$5, $4, $2
+# was:	add	_letBind_30_, _plus_L_31_, _plus_R_32_
+	ori	$4, $0, 3
+# was:	ori	_plus_L_34_, $0, 3
+# 	ori	_plus_R_35_,_param_z_25_,0
+	add	$4, $4, $2
+# was:	add	_letBind_33_, _plus_L_34_, _plus_R_35_
+	ori	$6, $0, 4
+# was:	ori	_plus_L_37_, $0, 4
+# 	ori	_plus_R_38_,_param_z_25_,0
+	add	$2, $6, $2
+# was:	add	_letBind_36_, _plus_L_37_, _plus_R_38_
+# 	ori	_arg_39_,_letBind_36_,0
+# 	ori	_arg_40_,_letBind_27_,0
+# 	ori	_arg_41_,_letBind_33_,0
+# 	ori	_arg_42_,_letBind_30_,0
+# 	ori	$2,_arg_39_,0
+# 	ori	$3,_arg_40_,0
+# 	ori	$4,_arg_41_,0
+# 	ori	$5,_arg_42_,0
+	jal	f
+# was:	jal	f, $2 $3 $4 $5
+# 	ori	_testres_26_,$2,0
+# 	ori	$2,_testres_26_,0
 	addi	$29, $29, 8
 	lw	$31, -4($29)
 	jr	$31
@@ -47,76 +121,43 @@ main:
 	sw	$17, -12($29)
 	sw	$16, -8($29)
 	addi	$29, $29, -16
-	ori	$16, $0, 4132
-# was:	ori	_tmp_10_, $0, 4132
-# 	ori	_letBind_9_,_tmp_10_,0
-	ori	$2, $16, 0
-# was:	ori	$2, _letBind_9_, 0
+	ori	$2, $0, 0
+# was:	ori	_arg_46_, $0, 0
+# 	ori	$2,_arg_46_,0
+	jal	test
+# was:	jal	test, $2
+# 	ori	_tmp_45_,$2,0
+	ori	$17, $2, 0
+# was:	ori	_letBind_44_, _tmp_45_, 0
+	ori	$2, $17, 0
+# was:	ori	$2, _letBind_44_, 0
 	jal	putint
 # was:	jal	putint, $2
 	ori	$2, $0, 1
-# was:	ori	_arg_14_, $0, 1
-# 	ori	$2,_arg_14_,0
+# was:	ori	_arg_50_, $0, 1
+# 	ori	$2,_arg_50_,0
 	jal	zero
 # was:	jal	zero, $2
-	ori	$6, $2, 0
-# was:	ori	_letBind_13_, $2, 0
-	ori	$2, $0, 1
-# was:	ori	_plus_L_16_, $0, 1
-# 	ori	_plus_R_17_,_letBind_13_,0
-	add	$4, $2, $6
-# was:	add	_letBind_15_, _plus_L_16_, _plus_R_17_
-	ori	$2, $0, 2
-# was:	ori	_plus_L_19_, $0, 2
-# 	ori	_plus_R_20_,_letBind_13_,0
-	add	$2, $2, $6
-# was:	add	_letBind_18_, _plus_L_19_, _plus_R_20_
-	ori	$3, $0, 3
-# was:	ori	_plus_L_22_, $0, 3
-# 	ori	_plus_R_23_,_letBind_13_,0
-	add	$3, $3, $6
-# was:	add	_letBind_21_, _plus_L_22_, _plus_R_23_
-	ori	$5, $0, 4
-# was:	ori	_plus_L_25_, $0, 4
-# 	ori	_plus_R_26_,_letBind_13_,0
-	add	$6, $5, $6
-# was:	add	_letBind_24_, _plus_L_25_, _plus_R_26_
-	ori	$5, $0, 1000
-# was:	ori	_mult1_L_33_, $0, 1000
-# 	ori	_mult2_R_34_,_letBind_24_,0
-	mul	$5, $5, $6
-# was:	mul	_plus_L_31_, _mult1_L_33_, _mult2_R_34_
-	ori	$6, $0, 100
-# was:	ori	_mult1_L_35_, $0, 100
-# 	ori	_mult2_R_36_,_letBind_15_,0
-	mul	$4, $6, $4
-# was:	mul	_plus_R_32_, _mult1_L_35_, _mult2_R_36_
-	add	$5, $5, $4
-# was:	add	_plus_L_29_, _plus_L_31_, _plus_R_32_
-	ori	$4, $0, 10
-# was:	ori	_mult1_L_37_, $0, 10
-# 	ori	_mult2_R_38_,_letBind_21_,0
-	mul	$3, $4, $3
-# was:	mul	_plus_R_30_, _mult1_L_37_, _mult2_R_38_
-	add	$3, $5, $3
-# was:	add	_plus_L_27_, _plus_L_29_, _plus_R_30_
-# 	ori	_plus_R_28_,_letBind_18_,0
-	add	$17, $3, $2
-# was:	add	_tmp_12_, _plus_L_27_, _plus_R_28_
-# 	ori	_letBind_11_,_tmp_12_,0
-	ori	$2, $17, 0
-# was:	ori	$2, _letBind_11_, 0
+# 	ori	_arg_49_,$2,0
+# 	ori	$2,_arg_49_,0
+	jal	test
+# was:	jal	test, $2
+# 	ori	_tmp_48_,$2,0
+	ori	$16, $2, 0
+# was:	ori	_letBind_47_, _tmp_48_, 0
+	ori	$2, $16, 0
+# was:	ori	$2, _letBind_47_, 0
 	jal	putint
 # was:	jal	putint, $2
 	ori	$2, $0, 10000
-# was:	ori	_mult1_L_41_, $0, 10000
-# 	ori	_mult2_R_42_,_letBind_9_,0
-	mul	$2, $2, $16
-# was:	mul	_plus_L_39_, _mult1_L_41_, _mult2_R_42_
-# 	ori	_plus_R_40_,_letBind_11_,0
-	add	$2, $2, $17
-# was:	add	_mainres_8_, _plus_L_39_, _plus_R_40_
-# 	ori	$2,_mainres_8_,0
+# was:	ori	_times_L_53_, $0, 10000
+# 	ori	_times_R_54_,_letBind_44_,0
+	mul	$2, $2, $17
+# was:	mul	_plus_L_51_, _times_L_53_, _times_R_54_
+# 	ori	_plus_R_52_,_letBind_47_,0
+	add	$2, $2, $16
+# was:	add	_mainres_43_, _plus_L_51_, _plus_R_52_
+# 	ori	$2,_mainres_43_,0
 	addi	$29, $29, 16
 	lw	$17, -12($29)
 	lw	$16, -8($29)

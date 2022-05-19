@@ -17,6 +17,29 @@
 _stop_:
 	ori	$2, $0, 10
 	syscall
+# Function f
+f:
+	sw	$31, -4($29)
+	addi	$29, $29, -8
+# 	ori	_param_x_1_,$2,0
+# 	ori	_param_y_2_,$3,0
+	ori	$4, $2, 0
+# was:	ori	_plus_L_6_, _param_x_1_, 0
+	ori	$2, $0, 2
+# was:	ori	_plus_R_7_, $0, 2
+	add	$2, $4, $2
+# was:	add	_times_L_4_, _plus_L_6_, _plus_R_7_
+# 	ori	_minus_L_8_,_param_y_2_,0
+	ori	$4, $0, 2
+# was:	ori	_minus_R_9_, $0, 2
+	sub	$3, $3, $4
+# was:	sub	_times_R_5_, _minus_L_8_, _minus_R_9_
+	mul	$2, $2, $3
+# was:	mul	_fres_3_, _times_L_4_, _times_R_5_
+# 	ori	$2,_fres_3_,0
+	addi	$29, $29, 8
+	lw	$31, -4($29)
+	jr	$31
 # Function main
 main:
 	sw	$31, -4($29)
@@ -24,25 +47,31 @@ main:
 	addi	$29, $29, -12
 	jal	getint
 # was:	jal	getint, $2
-# 	ori	_letBind_2_,$2,0
-	ori	$3, $2, 0
-# was:	ori	_plus_L_6_, _letBind_2_, 0
+# 	ori	_letBind_11_,$2,0
+	ori	$4, $2, 0
+# was:	ori	_letBind_13_, _letBind_11_, 0
 	ori	$2, $0, 2
-# was:	ori	_plus_R_7_, $0, 2
-	add	$2, $3, $2
-# was:	add	_mult1_L_4_, _plus_L_6_, _plus_R_7_
-	ori	$3, $0, 0
-# was:	ori	_mult2_R_5_, $0, 0
-	mul	$16, $2, $3
-# was:	mul	_letBind_3_, _mult1_L_4_, _mult2_R_5_
-# 	ori	_tmp_8_,_letBind_3_,0
-# 	ori	_mainres_1_,_tmp_8_,0
+# was:	ori	_letBind_14_, $0, 2
+# 	ori	_plus_L_17_,_letBind_13_,0
+	ori	$3, $0, 2
+# was:	ori	_plus_R_18_, $0, 2
+	add	$3, $4, $3
+# was:	add	_times_L_15_, _plus_L_17_, _plus_R_18_
+# 	ori	_minus_L_19_,_letBind_14_,0
+	ori	$4, $0, 2
+# was:	ori	_minus_R_20_, $0, 2
+	sub	$2, $2, $4
+# was:	sub	_times_R_16_, _minus_L_19_, _minus_R_20_
+	mul	$16, $3, $2
+# was:	mul	_letBind_12_, _times_L_15_, _times_R_16_
+# 	ori	_tmp_21_,_letBind_12_,0
+# 	ori	_mainres_10_,_tmp_21_,0
 	ori	$2, $16, 0
-# was:	ori	$2, _mainres_1_, 0
+# was:	ori	$2, _mainres_10_, 0
 	jal	putint
 # was:	jal	putint, $2
 	ori	$2, $16, 0
-# was:	ori	$2, _mainres_1_, 0
+# was:	ori	$2, _mainres_10_, 0
 	addi	$29, $29, 12
 	lw	$16, -8($29)
 	lw	$31, -4($29)
