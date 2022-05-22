@@ -694,7 +694,7 @@ let rec compileExp  (e      : TypedExp)
          counter computed in step (c). You do this of course with a
          `Mips.SW(counter_reg, place, 0)` instruction.
   *)
-  | Filter (_, _, _, _) ->
+  | Filter (farg, arr_exp, tp, pos) ->
       failwith "Unimplemented code generation of filter"
 
   (* TODO project task 2: see also the comment to replicate.
@@ -704,7 +704,7 @@ let rec compileExp  (e      : TypedExp)
         the current location of the result iterator at every iteration of
         the loop.
   *)
-  | Scan (_, _, _, _, _) ->
+  | Scan (farg, ne_exp, arr_exp, tp, pos) ->
       failwith "Unimplemented code generation of scan"
 
 and applyFunArg ( ff     : TypedFunArg
