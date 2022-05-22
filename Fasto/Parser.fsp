@@ -48,7 +48,7 @@ let parse_error_rich =
 %token <Position> NOT
 %token <Position> OR
 %token <Position> AND
-%token <Position> DEQ LTH EQ OP MAP REDUCE IOTA ARROW
+%token <Position> DEQ LTH EQ OP MAP REDUCE IOTA ARROW REPLICATE SCAN FILTER
 %token <Position> FUN FN COMMA SEMICOLON READ WRITE
 %token <Position> LPAR RPAR LBRACKET RBRACKET LCURLY RCURLY
 

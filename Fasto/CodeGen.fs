@@ -633,8 +633,54 @@ let rec compileExp  (e      : TypedExp)
         If `n` is less than `0` then remember to terminate the program with
         an error -- see implementation of `iota`.
   *)
-  | Replicate (_, _, _, _) ->
-      failwith "Unimplemented code generation of replicate"
+  | Replicate (n_exp, a_exp, tp, pos) ->
+      let n_reg = newReg "n_reg"
+      let n_code = compileExp n_exp vtable n_reg
+
+      let a_reg = newReg "a_reg"
+      let a_code = compileExp a_exp vtable a_reg
+
+      let elem_reg = newReg "elem_reg"
+
+      let res_reg = newReg "res_reg"
+
+      let size_reg = newReg "size_reg"
+
+      let get_size = [ Mips.MUL (size_reg, n_reg, a_reg) ]
+
+      let i_reg = newReg "i_reg"
+
+      let init_regs = [ Mips.ADDI (res_reg, place, 4)
+                      ; Mips.MOVE (i_reg, RZ) 
+                      ; Mips.ADDI (elem_reg, a_reg, 4) ]
+
+      let loop_beg = newLab "loop_beg"
+      let loop_end = newLab "loop_end"
+      let tmp_reg = newReg "tmp_reg"
+
+      let loop_header = [ Mips.LABEL (loop_beg)
+                        ; Mips.SUB (tmp_reg, i_reg, n_reg)
+                        ; Mips.BGEZ (tmp_reg, loop_end) ]
+
+      let dst_size = getElemSize tp
+      let loop_body =
+            [ mipsStore dst_size (res_reg, a_reg, 0) 
+            ; Mips.ADDI (res_reg, res_reg, elemSizeToInt dst_size)]
+
+      let loop_footer =
+              [ Mips.ADDI (i_reg, i_reg, 1)
+              ; Mips.J loop_beg
+              ; Mips.LABEL loop_end ]
+
+      n_code 
+      @ get_size 
+      @ dynalloc (size_reg, place, tp)
+      @ init_regs
+      @ loop_header
+      @ loop_body
+      @ loop_footer
+
+
 
   (* TODO project task 2: see also the comment to replicate.
      (a) `filter(f, arr)`:  has some similarity with the implementation of map.

@@ -21,6 +21,9 @@ type token =
   | REDUCE of (Position)
   | IOTA of (Position)
   | ARROW of (Position)
+  | REPLICATE of (Position)
+  | SCAN of (Position)
+  | FILTER of (Position)
   | AND of (Position)
   | OR of (Position)
   | NOT of (Position)
@@ -65,6 +68,9 @@ type tokenId =
     | TOKEN_REDUCE
     | TOKEN_IOTA
     | TOKEN_ARROW
+    | TOKEN_REPLICATE
+    | TOKEN_SCAN
+    | TOKEN_FILTER
     | TOKEN_AND
     | TOKEN_OR
     | TOKEN_NOT
