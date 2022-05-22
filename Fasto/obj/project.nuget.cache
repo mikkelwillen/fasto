@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IiEpDEIc64OyRM77CbUlcSfFBmUPf2Ni7tJsf5ExJVQAuogK7EmMAQJYhtBMkbBPhDgjkb73/a1AeSG+dcfFjQ==",
+  "dgSpecHash": "xeb70i5lNoKUwJMabRZ14d8qoW/RbzKNVUOBzZexuCReqll03mKDxe/mOFd+L4HtA+eFmlx/mo5hNHgcS/MLrg==",
   "success": true,
-  "projectFilePath": "/home/mikkel/Dokumenter/fasto/Fasto/Fasto.fsproj",
+  "projectFilePath": "/mnt/c/Users/mikke/Documents/Github/fasto/Fasto/Fasto.fsproj",
   "expectedPackageFiles": [
     "/home/mikkel/.nuget/packages/fsharp.core/6.0.4/fsharp.core.6.0.4.nupkg.sha512",
     "/home/mikkel/.nuget/packages/fslexyacc/10.2.0/fslexyacc.10.2.0.nupkg.sha512",

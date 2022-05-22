@@ -230,11 +230,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/mikkel/Dokumenter/fasto/Fasto/Fasto.fsproj",
+      "projectUniqueName": "/mnt/c/Users/mikke/Documents/Github/fasto/Fasto/Fasto.fsproj",
       "projectName": "Fasto",
-      "projectPath": "/home/mikkel/Dokumenter/fasto/Fasto/Fasto.fsproj",
+      "projectPath": "/mnt/c/Users/mikke/Documents/Github/fasto/Fasto/Fasto.fsproj",
       "packagesPath": "/home/mikkel/.nuget/packages/",
-      "outputPath": "/home/mikkel/Dokumenter/fasto/Fasto/obj/",
+      "outputPath": "/mnt/c/Users/mikke/Documents/Github/fasto/Fasto/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/mikkel/.nuget/NuGet/NuGet.Config"
