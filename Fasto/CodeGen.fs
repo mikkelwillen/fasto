@@ -701,13 +701,18 @@ let rec compileExp  (e      : TypedExp)
       let res_reg = newReg "res_reg"
       let addr_reg = newReg "addr_reg"
       let i_reg = newReg "i_reg"
+      let arrh_reg = newReg "arrh_reg"
+      let counter_reg = newReg "counter_reg"
       let tmp_reg = newReg "tmp_reg"
       let arr_code = compileExp arr_exp vtable arr_reg
 
       let get_size = [ Mips.LW (size_reg, arr_reg, 0) ]
 
       let init_regs = [ Mips.ADDI (addr_reg, place, 4) 
-                      ; Mips.MOVE (i_reg, RZ) 
+                      ; Mips.ADDI (arrh_reg, place, 0)
+                      ; Mips.MOVE (i_reg, RZ)
+                      ; Mips.MOVE (counter_reg, RZ)
+                      ; Mips.ADDI (counter_reg, counter_reg, 4)
                       ; Mips.ADDI (elem_reg, arr_reg, 4) ]
       
       let loop_beg = newLab "loop_beg"
@@ -719,18 +724,21 @@ let rec compileExp  (e      : TypedExp)
                         ; Mips.BGEZ (tmp_reg, loop_end) ]
 
       let elem_size = getElemSize tp
-      let loop_body = [ mipsLoad elem_size (res_reg, elem_reg, 0) 
+      let loop_body = [ mipsLoad elem_size (res_reg, elem_reg, 0)
+                      ; mipsLoad elem_size (tmp_reg, elem_reg, 0)
                       ; Mips.ADDI (elem_reg, elem_reg, elemSizeToInt elem_size) ]
                       @ applyFunArg (farg, [res_reg], vtable, res_reg, pos)
                       @
                       [ Mips.BEQ (res_reg, RZ, check_wrong)
-                      ; mipsStore elem_size (res_reg, addr_reg, 0)
-                      ; Mips.ADDI (addr_reg, addr_reg, elemSizeToInt elem_size) ]
+                      ; mipsStore elem_size (tmp_reg, addr_reg, 0)
+                      ; Mips.ADDI (addr_reg, addr_reg, elemSizeToInt elem_size)
+                      ; Mips.ADDI (counter_reg, counter_reg, 1) ]
 
       let loop_footer = [ Mips.LABEL (check_wrong)
                         ; Mips.ADDI (i_reg, i_reg, 1)
                         ; Mips.J loop_beg
-                        ; Mips.LABEL loop_end ]
+                        ; Mips.LABEL loop_end 
+                        ; Mips.SW (counter_reg, arrh_reg, 0) ]
       
       arr_code
       @ get_size

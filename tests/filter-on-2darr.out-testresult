@@ -1,0 +1,4 @@
+0 1 2 3 0 1 2 3 4 Error in /home/mikkel/Dokumenter/fasto/bin/../tests/filter-on-2darr.asm line 50: Runtime exception at 0x0040007c: address out of range 0x00000000
+
+Processing terminated due to errors.
+
