@@ -1,25 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "/home/carolineak/Desktop/fasto/Fasto/Fasto.fsproj": {}
+    "/home/mikkel/Dokumenter/fasto/Fasto/Fasto.fsproj": {}
   },
   "projects": {
-    "/home/carolineak/Desktop/fasto/Fasto/Fasto.fsproj": {
+    "/home/mikkel/Dokumenter/fasto/Fasto/Fasto.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/carolineak/Desktop/fasto/Fasto/Fasto.fsproj",
+        "projectUniqueName": "/home/mikkel/Dokumenter/fasto/Fasto/Fasto.fsproj",
         "projectName": "Fasto",
-        "projectPath": "/home/carolineak/Desktop/fasto/Fasto/Fasto.fsproj",
-        "packagesPath": "/home/carolineak/.nuget/packages/",
-        "outputPath": "/home/carolineak/Desktop/fasto/Fasto/obj/",
+        "projectPath": "/home/mikkel/Dokumenter/fasto/Fasto/Fasto.fsproj",
+        "packagesPath": "/home/mikkel/.nuget/packages/",
+        "outputPath": "/home/mikkel/Dokumenter/fasto/Fasto/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/carolineak/.nuget/NuGet/NuGet.Config"
+          "/home/mikkel/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "/usr/share/dotnet/sdk/6.0.300/FSharp/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -36,7 +37,7 @@
             "FSharp.Core": {
               "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
               "target": "Package",
-              "version": "[6.0.2, )",
+              "version": "[6.0.4, )",
               "generatePathProperty": true
             },
             "FsLexYacc": {
@@ -60,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.202/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
         }
       }
     }
