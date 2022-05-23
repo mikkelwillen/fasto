@@ -158,6 +158,23 @@ let dynalloc (size_reg : Mips.reg,
 
     code1 @ code2 @ code3
 
+let changeAllocSize (size_reg : Mips.reg,
+                     place    : Mips.reg,
+                     tp       : Type     )
+                    : Mips.Instruction list = 
+    let tmp_reg = newReg "tmpChange_reg"
+
+    let code1 = match getElemSize tp with
+                  | ESByte ->  [ Mips.ADDI(tmp_reg, size_reg, 3)
+                               ; Mips.SRA (tmp_reg, tmp_reg, 2)
+                               ; Mips.SLL (tmp_reg, tmp_reg, 2) ]
+                  | ESWord -> [ Mips.SLL (tmp_reg, size_reg, 2) ]
+    
+    let code2 = [ Mips.ADDI (tmp_reg, tmp_reg, 4)
+                ; Mips.SW (size_reg, place, 0) ]
+    
+    code1 @ code2
+
 (* Pushing arguments on the stack: *)
 (* For each register 'r' in 'rs', copy them to registers from
 'firstReg' and counting up. Return the full code and the next unused
@@ -712,18 +729,19 @@ let rec compileExp  (e      : TypedExp)
                       ; Mips.ADDI (arrh_reg, place, 0)
                       ; Mips.MOVE (i_reg, RZ)
                       ; Mips.MOVE (counter_reg, RZ)
-                      ; Mips.ADDI (counter_reg, counter_reg, 4)
                       ; Mips.ADDI (elem_reg, arr_reg, 4) ]
       
       let loop_beg = newLab "loop_beg"
       let check_wrong = newLab "check_wrong"
       let loop_end = newLab "loop_end"
       let tmp_reg = newReg "tmp_reg"
+
       let loop_header = [ Mips.LABEL (loop_beg)
                         ; Mips.SUB (tmp_reg, i_reg, size_reg)
                         ; Mips.BGEZ (tmp_reg, loop_end) ]
 
       let elem_size = getElemSize tp
+
       let loop_body = [ mipsLoad elem_size (res_reg, elem_reg, 0)
                       ; mipsLoad elem_size (tmp_reg, elem_reg, 0)
                       ; Mips.ADDI (elem_reg, elem_reg, elemSizeToInt elem_size) ]
@@ -738,7 +756,7 @@ let rec compileExp  (e      : TypedExp)
                         ; Mips.ADDI (i_reg, i_reg, 1)
                         ; Mips.J loop_beg
                         ; Mips.LABEL loop_end 
-                        ; Mips.SW (counter_reg, arrh_reg, 0) ]
+                        ; Mips.MOVE (tmp_reg, counter_reg) ]
       
       arr_code
       @ get_size
@@ -747,6 +765,8 @@ let rec compileExp  (e      : TypedExp)
       @ loop_header
       @ loop_body
       @ loop_footer
+      @ changeAllocSize (tmp_reg, arrh_reg, tp)
+
   (* TODO project task 2: see also the comment to replicate.
      `scan(f, ne, arr)`: you can inspire yourself from the implementation of
         `reduce`, but in the case of `scan` you will need to also maintain
@@ -755,7 +775,51 @@ let rec compileExp  (e      : TypedExp)
         the loop.
   *)
   | Scan (farg, ne_exp, arr_exp, tp, pos) ->
-      failwith "Unimplemented code generation of scan"
+      let arr_reg = newReg "arr_reg"
+      let size_reg = newReg "size_reg"
+      let elem_reg = newReg "elem_reg"
+      let res_reg = newReg "res_reg"
+      let addr_reg = newReg "addr_reg"
+      let acc_reg = newReg "acc_reg"
+      let i_reg = newReg "i_reg"
+      let tmp_reg = newReg "tmp_reg"
+
+      let arr_code = compileExp arr_exp vtable arr_reg
+      let ne_code = compileExp ne_exp vtable acc_reg
+
+      let get_size = [ Mips.LW (size_reg, arr_reg, 0) ]
+
+      let init_regs = [ Mips.ADDI (res_reg, place, 4)
+                      ; Mips.MOVE (i_reg, RZ)
+                      ; Mips.ADDI (elem_reg, arr_reg, 4) ]
+
+      let loop_beg = newLab "loop_beg"
+      let loop_end = newLab "loop_end"
+
+      let loop_header = [ Mips.LABEL (loop_beg)
+                        ; Mips.SUB (tmp_reg, i_reg, size_reg)
+                        ; Mips.BGEZ (tmp_reg, loop_end) ]
+      
+      let elem_size = getElemSize tp
+
+      let loop_body = [ mipsLoad elem_size (tmp_reg, elem_reg, 0)
+                      ; Mips.ADDI (elem_reg, elem_reg, elemSizeToInt elem_size) ]
+                      @ applyFunArg (farg, [acc_reg; tmp_reg], vtable, acc_reg, pos)
+                      @
+                      [ mipsStore elem_size (acc_reg, res_reg, 0) 
+                      ; Mips.ADDI (res_reg, res_reg, elemSizeToInt elem_size) ]
+      
+      let loop_footer = [ Mips.ADDI (i_reg, i_reg, 1)
+                        ; Mips.J loop_beg
+                        ; Mips.LABEL loop_end ]
+      
+      arr_code @ ne_code
+       @ get_size
+       @ dynalloc (size_reg, place, tp)
+       @ init_regs
+       @ loop_header
+       @ loop_body
+       @ loop_footer
 
 and applyFunArg ( ff     : TypedFunArg
                 , args   : Mips.reg list
