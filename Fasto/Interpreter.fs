@@ -326,9 +326,9 @@ let rec evalExp (e : UntypedExp, vtab : VarTable, ftab : FunTable) : Value =
                                                       | BoolVal b -> b
                                                       | otherwise -> reportWrongType "Function argument of \"filter\"" Bool arr pos
                                                                       ) lst
-                        ArrayVal (mlst, farg_ret_type)
+                        ArrayVal (mlst, tp1)
                     | otherwise -> reportNonArray "2nd argument of \"filter\"" arr pos
-            | _ -> reportWrongType "Function argument of \"filter\"" Bool arr pos
+            | _ -> reportWrongType "Function argument of \"filter\"" Int arr pos
 
   (* TODO project task 2: `scan(f, ne, arr)`
      Implementation similar to reduce, except that it produces an array
