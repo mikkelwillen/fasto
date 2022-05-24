@@ -8,18 +8,18 @@
     ".NETCoreApp,Version=v6.0": {
       "Fasto/1.0.0": {
         "dependencies": {
-          "FSharp.Core": "6.0.2",
+          "FSharp.Core": "6.0.4",
           "FsLexYacc": "10.2.0"
         },
         "runtime": {
           "Fasto.dll": {}
         }
       },
-      "FSharp.Core/6.0.2": {
+      "FSharp.Core/6.0.4": {
         "runtime": {
           "lib/netstandard2.1/FSharp.Core.dll": {
             "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.221.63103"
+            "fileVersion": "6.0.422.21903"
           }
         },
         "resources": {
@@ -66,13 +66,13 @@
       },
       "FsLexYacc/10.2.0": {
         "dependencies": {
-          "FSharp.Core": "6.0.2",
+          "FSharp.Core": "6.0.4",
           "FsLexYacc.Runtime": "10.2.0"
         }
       },
       "FsLexYacc.Runtime/10.2.0": {
         "dependencies": {
-          "FSharp.Core": "6.0.2"
+          "FSharp.Core": "6.0.4"
         },
         "runtime": {
           "lib/netstandard2.0/FsLexYacc.Runtime.dll": {
@@ -89,12 +89,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "FSharp.Core/6.0.2": {
+    "FSharp.Core/6.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-8GZqv6buY71KQlWT+cl2eMi+aNX9xQ61RgI3Pzv9zPxPOX6tWCLRrBj0MYQ3h871r2RhiHUl7f0AXUD/POr8eA==",
-      "path": "fsharp.core/6.0.2",
-      "hashPath": "fsharp.core.6.0.2.nupkg.sha512"
+      "sha512": "sha512-CYqAfmO7JvN38M+ACkstS8taVfl8C0mCkvSiBAshfKuu2Nut6+8MuFU7Wahu09wGIyFPlRz5ArFWxSOM5mhMSA==",
+      "path": "fsharp.core/6.0.4",
+      "hashPath": "fsharp.core.6.0.4.nupkg.sha512"
     },
     "FsLexYacc/10.2.0": {
       "type": "package",
