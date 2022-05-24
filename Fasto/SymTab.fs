@@ -27,7 +27,7 @@ let remove n (SymTab stab) =
     SymTab (List.filter (fun (x, _) -> x <> n) stab)
 
 let removeMany ns (SymTab stab) =
-  SymTab (List.filter (fun (x, _) ->
+    SymTab (List.filter (fun (x, _) ->
             not (List.exists (fun y -> y = x) ns)) stab)
 
 let combine (SymTab t1) (SymTab t2) = SymTab (t1 @ t2)
