@@ -75,8 +75,9 @@ let rec copyConstPropFoldExp (vtable : VarTable)
                         restructured, semantically-equivalent expression:
                                 `let x = e1 in let y = e2 in e3`
                     *)
-                    copyConstPropFoldExp (SymTab.bind name (
-                                Let (Dec (name2, e2, decpos2), b, pos)) vtable) body
+                    // copyConstPropFoldExp (SymTab.bind name (
+                    //             Let (Dec (name2, e2, decpos2), b, pos)) vtable) body
+                    failwith "fail"
                 | _ -> (* Fallthrough - for everything else, do nothing *)
                     let body' = copyConstPropFoldExp vtable body
                     Let (Dec (name, e', decpos), body', pos)

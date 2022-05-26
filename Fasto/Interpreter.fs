@@ -82,19 +82,19 @@ let rec bindParams (fargs : Param list)
                    (pdec  : Position)
                    (pcall : Position) : VarTable =
   match (fargs, aargs) with
-  | ([], []) -> SymTab.empty ()
-  | (Param (faid, fatp) :: fargs, v :: aargs) ->
-      let vtab = bindParams fargs aargs fid pdec pcall
-      if typeMatch(fatp, v)
-        then match SymTab.lookup faid vtab with
-               None   -> SymTab.bind faid v vtab
-             | Some m -> raise (MyError( "Formal argument is already in symbol table!"+
-                                         " In function: "+fid+" formal argument: "+faid
-                                       , pdec ))
-        else reportWrongType ("argument " + faid + " of function " + fid)
-                            fatp v pcall
-  | (_, _) -> raise (MyError("Number of formal and actual params do not match in call to "+fid,
-                             pcall))
+    | ([], []) -> SymTab.empty ()
+    | (Param (faid, fatp) :: fargs, v :: aargs) ->
+        let vtab = bindParams fargs aargs fid pdec pcall
+        if typeMatch(fatp, v)
+          then match SymTab.lookup faid vtab with
+                None   -> SymTab.bind faid v vtab
+              | Some m -> raise (MyError( "Formal argument is already in symbol table!"+
+                                          " In function: "+fid+" formal argument: "+faid
+                                        , pdec ))
+          else reportWrongType ("argument " + faid + " of function " + fid)
+                              fatp v pcall
+    | (_, _) -> raise (MyError("Number of formal and actual params do not match in call to "+fid,
+                              pcall))
 
 
 (* Interpreter for Fasto expressions:
@@ -163,30 +163,34 @@ let rec evalExp (e : UntypedExp, vtab : VarTable, ftab : FunTable) : Value =
           | (_, _) -> reportWrongType "left operand of /" Int res1 (expPos e1)
   | And (e1, e2, pos) ->
         let res1   = evalExp(e1, vtab, ftab)
-        let res2   = evalExp(e2, vtab, ftab)
-        match (res1, res2) with
-          | (BoolVal b1, BoolVal b2) ->
+        match res1 with
+          | BoolVal b1 ->
             match b1 with
               | true -> 
-                match b2 with
-                  | true -> BoolVal true
-                  | _ -> BoolVal false
+                let res2 = evalExp(e2, vtab, ftab)
+                match res2 with
+                  | BoolVal b2 ->
+                    match b2 with
+                      | true -> BoolVal true
+                      | _ -> BoolVal false
+                  | _ -> reportWrongType "right operand of &&" Bool res2 (expPos e2)
               | _ -> BoolVal false
-          | (BoolVal _, _) -> reportWrongType "right operand of &&" Bool res2 (expPos e2)
-          | (_, _) -> reportWrongType "left operand of &&" Bool res1 (expPos e1)
+          | _ -> reportWrongType "left operand of &&" Bool res1 (expPos e1)
   | Or (e1, e2, pos) ->
         let res1   = evalExp(e1, vtab, ftab)
-        let res2   = evalExp(e2, vtab, ftab)
-        match (res1, res2) with
-          | (BoolVal b1, BoolVal b2) ->
+        match res1 with
+          | BoolVal b1 ->
             match b1 with
-              | true -> BoolVal true
-              | _ -> 
-                match b2 with
-                  | true -> BoolVal true
-                  | _ -> BoolVal false
-          | (BoolVal _, _) -> reportWrongType "right operand of ||" Bool res2 (expPos e2)
-          | (_, _) -> reportWrongType "left operand of ||" Bool res1 (expPos e1)
+              | false -> 
+                let res2 = evalExp(e2, vtab, ftab)
+                match res2 with
+                  | BoolVal b2 ->
+                    match b2 with
+                      | true -> BoolVal true
+                      | _ -> BoolVal false
+                  | _ -> reportWrongType "right operand of ||" Bool res2 (expPos e2)
+              | _ -> BoolVal true
+          | _ -> reportWrongType "left operand of ||" Bool res1 (expPos e1)
   | Not (e, pos) ->
         let res   = evalExp(e, vtab, ftab)
         match res with
