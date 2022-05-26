@@ -24,16 +24,16 @@ main:
 	addi	$29, $29, -12
 	ori	$16, $0, 1
 # was:	ori	_letBind_2_, $0, 1
-	ori	$3, $0, 0
-# was:	ori	_And_L_5_, $0, 0
-# 	ori	_And_R_6_,_letBind_2_,0
 	ori	$4, $0, 0
+# was:	ori	_And_L_5_, $0, 0
+	ori	$3, $0, 0
 # was:	ori	_falseReg_7_, $0, 0
 	ori	$2, $0, 0
 # was:	ori	_tmp_4_, $0, 0
-	beq	$3, $4, _false_8_
+	beq	$4, $3, _false_8_
 # was:	beq	_And_L_5_, _falseReg_7_, _false_8_
-	beq	$16, $4, _false_8_
+# 	ori	_And_R_6_,_letBind_2_,0
+	beq	$16, $3, _false_8_
 # was:	beq	_And_R_6_, _falseReg_7_, _false_8_
 	ori	$2, $0, 1
 # was:	ori	_tmp_4_, $0, 1
@@ -49,16 +49,16 @@ _false_8_:
 _wBoolF_9_:
 	jal	putstring
 # was:	jal	putstring, $2
-	ori	$2, $0, 1
-# was:	ori	_Or_L_12_, $0, 1
-# 	ori	_Or_R_13_,_letBind_2_,0
 	ori	$4, $0, 1
+# was:	ori	_Or_L_12_, $0, 1
+	ori	$2, $0, 1
 # was:	ori	_trueReg_14_, $0, 1
 	ori	$3, $0, 1
 # was:	ori	_tmp_11_, $0, 1
-	beq	$2, $4, _true_15_
+	beq	$4, $2, _true_15_
 # was:	beq	_Or_L_12_, _trueReg_14_, _true_15_
-	beq	$16, $4, _true_15_
+# 	ori	_Or_R_13_,_letBind_2_,0
+	beq	$16, $2, _true_15_
 # was:	beq	_Or_R_13_, _trueReg_14_, _true_15_
 	ori	$3, $0, 0
 # was:	ori	_tmp_11_, $0, 0

@@ -431,13 +431,15 @@ let rec compileExp  (e      : TypedExp)
       let code2 = compileExp e2 vtable t2
       let code3 = compileExp (Constant (IntVal 0, pos)) vtable t3
       let falseLabel = newLab "false"
-      code1 @ code2 @ code3 @
+      code1 @ code3 @
       [ Mips.LI (place, 0);
-        Mips.BEQ(t1, t3, falseLabel);
-        Mips.BEQ(t2, t3, falseLabel);
+        Mips.BEQ(t1, t3, falseLabel) ]
+      @ code2
+      @
+      [ Mips.BEQ(t2, t3, falseLabel);
         Mips.LI (place, 1);
-        Mips.LABEL falseLabel
-      ]
+        Mips.LABEL falseLabel]
+  
 
   | Or (e1, e2, pos) ->
       let t1 = newReg "Or_L"
@@ -447,13 +449,14 @@ let rec compileExp  (e      : TypedExp)
       let code2 = compileExp e2 vtable t2
       let code3 = compileExp (Constant (IntVal 1, pos)) vtable t3
       let trueLabel = newLab "true"
-      code1 @ code2 @ code3 @
+      code1 @ code3 @
       [ Mips.LI (place, 1);
-        Mips.BEQ(t1, t3, trueLabel);
-        Mips.BEQ(t2, t3, trueLabel);
+        Mips.BEQ(t1, t3, trueLabel) ]
+      @ code2
+      @
+      [ Mips.BEQ(t2, t3, trueLabel);
         Mips.LI (place, 0);
-        Mips.LABEL trueLabel
-      ]
+        Mips.LABEL trueLabel ]
 
   (* Indexing:
      1. generate code to compute the index

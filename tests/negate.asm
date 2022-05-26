@@ -126,16 +126,16 @@ _false_27_:
 # was:	ori	_0_37_, $0, 0
 	ori	$3, $0, 2
 # was:	ori	_Negate_36_, $0, 2
-	sub	$4, $4, $3
+	sub	$3, $4, $3
 # was:	sub	_eq_R_31_, _0_37_, _Negate_36_
-	ori	$3, $0, 0
+	ori	$4, $0, 0
 # was:	ori	_arg_29_, $0, 0
-	bne	$2, $4, _false_38_
+	bne	$2, $3, _false_38_
 # was:	bne	_eq_L_30_, _eq_R_31_, _false_38_
-	ori	$3, $0, 1
+	ori	$4, $0, 1
 # was:	ori	_arg_29_, $0, 1
 _false_38_:
-	ori	$2, $3, 0
+	ori	$2, $4, 0
 # was:	ori	$2, _arg_29_, 0
 	jal	write_nl
 # was:	jal	write_nl, $2
@@ -145,15 +145,15 @@ _false_38_:
 # was:	ori	_0_46_, $0, 0
 	ori	$2, $0, 3
 # was:	ori	_Negate_45_, $0, 3
-	sub	$2, $3, $2
+	sub	$3, $3, $2
 # was:	sub	_divide_L_43_, _0_46_, _Negate_45_
 	ori	$4, $0, 0
 # was:	ori	_0_48_, $0, 0
-	ori	$3, $0, 2
+	ori	$2, $0, 2
 # was:	ori	_Negate_47_, $0, 2
-	sub	$3, $4, $3
+	sub	$2, $4, $2
 # was:	sub	_divide_R_44_, _0_48_, _Negate_47_
-	div	$2, $2, $3
+	div	$2, $3, $2
 # was:	div	_eq_L_41_, _divide_L_43_, _divide_R_44_
 	ori	$3, $0, 1
 # was:	ori	_eq_R_42_, $0, 1
@@ -170,37 +170,37 @@ _false_49_:
 # was:	jal	write_nl, $2
 # 	ori	_letBind_39_,$2,0
 # 	ori	_And_L_57_,_letBind_10_,0
-# 	ori	_And_R_58_,_letBind_17_,0
 	ori	$4, $0, 0
 # was:	ori	_falseReg_59_, $0, 0
 	ori	$3, $0, 0
 # was:	ori	_And_L_54_, $0, 0
 	beq	$18, $4, _false_60_
 # was:	beq	_And_L_57_, _falseReg_59_, _false_60_
+# 	ori	_And_R_58_,_letBind_17_,0
 	beq	$17, $4, _false_60_
 # was:	beq	_And_R_58_, _falseReg_59_, _false_60_
 	ori	$3, $0, 1
 # was:	ori	_And_L_54_, $0, 1
 _false_60_:
-# 	ori	_And_R_55_,_letBind_28_,0
 	ori	$5, $0, 0
 # was:	ori	_falseReg_56_, $0, 0
 	ori	$4, $0, 0
 # was:	ori	_And_L_51_, $0, 0
 	beq	$3, $5, _false_61_
 # was:	beq	_And_L_54_, _falseReg_56_, _false_61_
+# 	ori	_And_R_55_,_letBind_28_,0
 	beq	$16, $5, _false_61_
 # was:	beq	_And_R_55_, _falseReg_56_, _false_61_
 	ori	$4, $0, 1
 # was:	ori	_And_L_51_, $0, 1
 _false_61_:
-# 	ori	_And_R_52_,_letBind_39_,0
 	ori	$3, $0, 0
 # was:	ori	_falseReg_53_, $0, 0
 	ori	$5, $0, 0
 # was:	ori	_arg_50_, $0, 0
 	beq	$4, $3, _false_62_
 # was:	beq	_And_L_51_, _falseReg_53_, _false_62_
+# 	ori	_And_R_52_,_letBind_39_,0
 	beq	$2, $3, _false_62_
 # was:	beq	_And_R_52_, _falseReg_53_, _false_62_
 	ori	$5, $0, 1
