@@ -746,12 +746,11 @@ let rec compileExp  (e      : TypedExp)
       let elem_size = getElemSize tp
 
       let loop_body = [ mipsLoad elem_size (res_reg, elem_reg, 0)
-                      ; mipsLoad elem_size (tmp_reg, elem_reg, 0)
                       ; Mips.ADDI (elem_reg, elem_reg, elemSizeToInt elem_size) ]
-                      @ applyFunArg (farg, [res_reg], vtable, res_reg, pos)
+                      @ applyFunArg (farg, [res_reg], vtable, tmp_reg, pos)
                       @
-                      [ Mips.BEQ (res_reg, RZ, check_wrong)
-                      ; mipsStore elem_size (tmp_reg, addr_reg, 0)
+                      [ Mips.BEQ (tmp_reg, RZ, check_wrong)
+                      ; mipsStore elem_size (res_reg, addr_reg, 0)
                       ; Mips.ADDI (addr_reg, addr_reg, elemSizeToInt elem_size)
                       ; Mips.ADDI (counter_reg, counter_reg, 1) ]
 
