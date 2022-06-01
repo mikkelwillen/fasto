@@ -1,0 +1,4 @@
+Error in /home/mikkel/Dokumenter/fasto/bin/../tests/inline_map.asm line 84: Runtime exception at 0x004000b8: address out of range 0x00000064
+
+Processing terminated due to errors.
+

@@ -158,22 +158,6 @@ let dynalloc (size_reg : Mips.reg,
 
     code1 @ code2 @ code3
 
-let changeAllocSize (size_reg : Mips.reg,
-                     place    : Mips.reg,
-                     tp       : Type     )
-                    : Mips.Instruction list = 
-    let tmp_reg = newReg "tmpChange_reg"
-
-    let code1 = match getElemSize tp with
-                  | ESByte ->  [ Mips.ADDI(tmp_reg, size_reg, 3)
-                               ; Mips.SRA (tmp_reg, tmp_reg, 2)
-                               ; Mips.SLL (tmp_reg, tmp_reg, 2) ]
-                  | ESWord -> [ Mips.SLL (tmp_reg, size_reg, 2) ]
-    
-    let code2 = [ Mips.ADDI (tmp_reg, tmp_reg, 4)
-                ; Mips.SW (size_reg, place, 0) ]
-    
-    code1 @ code2
 
 (* Pushing arguments on the stack: *)
 (* For each register 'r' in 'rs', copy them to registers from
@@ -758,7 +742,7 @@ let rec compileExp  (e      : TypedExp)
                         ; Mips.ADDI (i_reg, i_reg, 1)
                         ; Mips.J loop_beg
                         ; Mips.LABEL loop_end 
-                        ; Mips.MOVE (tmp_reg, counter_reg) ]
+                        ; Mips.SW (counter_reg, arrh_reg, 0) ]
       
       arr_code
       @ get_size
@@ -767,7 +751,6 @@ let rec compileExp  (e      : TypedExp)
       @ loop_header
       @ loop_body
       @ loop_footer
-      @ changeAllocSize (tmp_reg, arrh_reg, tp)
 
   (* TODO project task 2: see also the comment to replicate.
      `scan(f, ne, arr)`: you can inspire yourself from the implementation of

@@ -23,6 +23,7 @@ let rec unzip3 = function
     | (x,y,z)::l ->
         let (xs, ys, zs) = unzip3 l
         (x::xs, y::ys, z::zs)
+
 let anytrue = List.exists (fun x -> x)
 
 (*  Input: the expression to be optimised (by removing inner dead bindings)
@@ -61,14 +62,15 @@ let rec removeDeadBindingsInExp (e : TypedExp) : (bool * DBRtab * TypedExp) =
              List.fold SymTab.combine (SymTab.empty()) uses,
              ArrayLit (es', t, pos) )
         (* ToDO: Task 3: implement the cases of `Var`, `Index` and `Let` expressions below *)
-        | Var (name, pos) ->
+        | Var (name, pos) -> 
+            let tempStab = recordUse name (SymTab.empty())    
+            (false, tempStab, Var (name, pos))
             (* Task 3, Hints for the `Var` case:
                   - 1st element of result tuple: can a variable name contain IO?
                   - 2nd element of result tuple: you have discovered a name, hence
                         you need to record it in a new symbol table.
                   - 3rd element of the tuple: should be the optimised expression.
             *)
-            failwith "Unimplemented removeDeadBindingsInExp for Var"
         | Plus (x, y, pos) ->
             let (xios, xuses, x') = removeDeadBindingsInExp x
             let (yios, yuses, y') = removeDeadBindingsInExp y
@@ -113,13 +115,16 @@ let rec removeDeadBindingsInExp (e : TypedExp) : (bool * DBRtab * TypedExp) =
              List.fold SymTab.combine (SymTab.empty()) uses,
              Apply (fname, args', pos))
         | Index (name, e, t, pos) ->
+            let (eio, euses, e') = removeDeadBindingsInExp e
+            let tempStab = recordUse name euses
+            (eio,
+             tempStab,
+             Index(name, e', t, pos))
             (* Task 3, `Index` case: is similar to the `Var` case, except that,
                         additionally, you also need to recursively optimize the index
                         expression `e` and to propagate its results (in addition
                         to recording the use of `name`).
             *)
-            failwith "Unimplemented removeDeadBindingsInExp for Index"
-
         | Let (Dec (name, e, decpos), body, pos) ->
             (* Task 3, Hints for the `Let` case:
                   - recursively process the `e` and `body` subexpressions
@@ -144,7 +149,15 @@ let rec removeDeadBindingsInExp (e : TypedExp) : (bool * DBRtab * TypedExp) =
                     Let-expression.
 
             *)
-            failwith "Unimplemented removeDeadBindingsInExp for Let"
+            let (eio, euses, e') = removeDeadBindingsInExp e
+            let (bodyio, bodyuses, body') = removeDeadBindingsInExp body
+            let checkBody = match isUsed name bodyuses with
+                              | true  -> SymTab.remove name bodyuses
+                              | _ -> bodyuses
+            let tempStab = recordUse name euses
+            (eio || bodyio,
+             SymTab.combine euses tempStab,
+             Let (Dec (name, e', decpos), body', pos))
         | Iota (e, pos) ->
             let (io, uses, e') = removeDeadBindingsInExp e
             (io,

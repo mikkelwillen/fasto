@@ -63,7 +63,7 @@ let rec copyConstPropFoldExp (vtable : VarTable)
                               and optimize the `body` of the let.
                     *)
                     copyConstPropFoldExp (SymTab.bind name (ConstProp v) vtable) body
-                | Let (Dec (name2, e2, decpos2), b, pos) ->
+                | Let (Dec (name2, e2, decpos2), b, pos2) ->
                     (* TODO project task 3:
                         Hint: this has the structure
                                 `let y = (let x = e1 in e2) in e3`
@@ -74,10 +74,13 @@ let rec copyConstPropFoldExp (vtable : VarTable)
                         A potential solution is to optimize directly the
                         restructured, semantically-equivalent expression:
                                 `let x = e1 in let y = e2 in e3`
+                                let name2 = e2 in let name = e in body
                     *)
                     // copyConstPropFoldExp (SymTab.bind name (
-                    //             Let (Dec (name2, e2, decpos2), b, pos)) vtable) body
-                    failwith "fail"
+                    //            Let (Dec (name2, e2, decpos2), b, pos)) vtable) body
+                    // copyConstPropFoldExp (Let (Dec (name, e, decpos),
+                    copyConstPropFoldExp vtable (Let (Dec (name2, e2, decpos), 
+                                                    Let (Dec (name, b, decpos2), body, pos2), pos))
                 | _ -> (* Fallthrough - for everything else, do nothing *)
                     let body' = copyConstPropFoldExp vtable body
                     Let (Dec (name, e', decpos), body', pos)
