@@ -25,10 +25,10 @@ main:
 	jal	getint
 # was:	jal	getint, $2
 # 	ori	_letBind_2_,$2,0
+# 	ori	_times_L_4_,_letBind_2_,0
 	ori	$3, $2, 0
-# was:	ori	_times_L_4_, _letBind_2_, 0
-# 	ori	_times_R_5_,_letBind_2_,0
-	mul	$4, $3, $2
+# was:	ori	_times_R_5_, _letBind_2_, 0
+	mul	$4, $2, $3
 # was:	mul	_letBind_3_, _times_L_4_, _times_R_5_
 # 	ori	_plus_L_7_,_letBind_3_,0
 	ori	$3, $0, 3
@@ -37,38 +37,29 @@ main:
 # was:	add	_letBind_6_, _plus_L_7_, _plus_R_8_
 # 	ori	_plus_L_10_,_letBind_6_,0
 # 	ori	_plus_R_11_,_letBind_2_,0
-	add	$3, $3, $2
+	add	$4, $3, $2
 # was:	add	_letBind_9_, _plus_L_10_, _plus_R_11_
 # 	ori	_plus_L_13_,_letBind_9_,0
-	ori	$4, $0, 8
+	ori	$3, $0, 8
 # was:	ori	_plus_R_14_, $0, 8
-	add	$0, $3, $4
+	add	$0, $4, $3
 # was:	add	_letBind_12_, _plus_L_13_, _plus_R_14_
 # 	ori	_plus_L_16_,_letBind_2_,0
 	ori	$3, $0, 2
 # was:	ori	_plus_R_17_, $0, 2
 	add	$3, $2, $3
 # was:	add	_letBind_15_, _plus_L_16_, _plus_R_17_
-# 	ori	_plus_L_21_,_letBind_15_,0
-	ori	$4, $0, 2
-# was:	ori	_plus_R_22_, $0, 2
-	add	$4, $3, $4
-# was:	add	_plus_L_19_, _plus_L_21_, _plus_R_22_
-# 	ori	_plus_R_20_,_letBind_2_,0
-	add	$0, $4, $2
-# was:	add	_letBind_18_, _plus_L_19_, _plus_R_20_
-# 	ori	_plus_L_24_,_letBind_2_,0
+# 	ori	_plus_L_19_,_letBind_2_,0
 	ori	$4, $0, 3
-# was:	ori	_plus_R_25_, $0, 3
+# was:	ori	_plus_R_20_, $0, 3
 	add	$2, $2, $4
-# was:	add	_letBind_23_, _plus_L_24_, _plus_R_25_
-# 	ori	_times_L_27_,_letBind_15_,0
-# 	ori	_times_R_28_,_letBind_23_,0
-	mul	$2, $3, $2
-# was:	mul	_letBind_26_, _times_L_27_, _times_R_28_
-# 	ori	_tmp_29_,_letBind_26_,0
-	ori	$16, $2, 0
-# was:	ori	_mainres_1_, _tmp_29_, 0
+# was:	add	_letBind_18_, _plus_L_19_, _plus_R_20_
+# 	ori	_times_L_22_,_letBind_15_,0
+# 	ori	_times_R_23_,_letBind_18_,0
+	mul	$16, $3, $2
+# was:	mul	_letBind_21_, _times_L_22_, _times_R_23_
+# 	ori	_tmp_24_,_letBind_21_,0
+# 	ori	_mainres_1_,_tmp_24_,0
 	ori	$2, $16, 0
 # was:	ori	$2, _mainres_1_, 0
 	jal	putint
