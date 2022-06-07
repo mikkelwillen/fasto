@@ -639,8 +639,8 @@ state 10:  items:    Fun -> Type 'ID' 'LPAR' Params . 'RPAR' 'EQ' Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -696,14 +696,14 @@ state 13:  items:    Fun -> Type 'ID' 'LPAR' Params 'RPAR' 'EQ' Exp .
     action 'REPLICATE' (noprec):   reduce Fun --> Type 'ID' 'LPAR' Params 'RPAR' 'EQ' Exp
     action 'SCAN' (noprec):   reduce Fun --> Type 'ID' 'LPAR' Params 'RPAR' 'EQ' Exp
     action 'FILTER' (noprec):   reduce Fun --> Type 'ID' 'LPAR' Params 'RPAR' 'EQ' Exp
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   reduce Fun --> Type 'ID' 'LPAR' Params 'RPAR' 'EQ' Exp
     action 'NEGATE' (noprec):   reduce Fun --> Type 'ID' 'LPAR' Params 'RPAR' 'EQ' Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   reduce Fun --> Type 'ID' 'LPAR' Params 'RPAR' 'EQ' Exp
     action 'INT' (noprec):   reduce Fun --> Type 'ID' 'LPAR' Params 'RPAR' 'EQ' Exp
     action 'CHAR' (noprec):   reduce Fun --> Type 'ID' 'LPAR' Params 'RPAR' 'EQ' Exp
@@ -798,8 +798,8 @@ state 13:  items:    Fun -> Type 'ID' 'LPAR' Params 'RPAR' 'EQ' Exp .
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -855,14 +855,14 @@ state 16:  items:    Fun -> Type 'ID' 'LPAR' 'RPAR' 'EQ' Exp .
     action 'REPLICATE' (noprec):   reduce Fun --> Type 'ID' 'LPAR' 'RPAR' 'EQ' Exp
     action 'SCAN' (noprec):   reduce Fun --> Type 'ID' 'LPAR' 'RPAR' 'EQ' Exp
     action 'FILTER' (noprec):   reduce Fun --> Type 'ID' 'LPAR' 'RPAR' 'EQ' Exp
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   reduce Fun --> Type 'ID' 'LPAR' 'RPAR' 'EQ' Exp
     action 'NEGATE' (noprec):   reduce Fun --> Type 'ID' 'LPAR' 'RPAR' 'EQ' Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   reduce Fun --> Type 'ID' 'LPAR' 'RPAR' 'EQ' Exp
     action 'INT' (noprec):   reduce Fun --> Type 'ID' 'LPAR' 'RPAR' 'EQ' Exp
     action 'CHAR' (noprec):   reduce Fun --> Type 'ID' 'LPAR' 'RPAR' 'EQ' Exp
@@ -1387,55 +1387,55 @@ state 26:  items:    Params -> Type 'ID' 'COMMA' Params .
     action '#' (noprec):   reduce Params --> Type 'ID' 'COMMA' Params
     action '$$' (noprec):   reduce Params --> Type 'ID' 'COMMA' Params
   immediate action:   reduce Params --> Type 'ID' 'COMMA' Params  gotos:state 27:  items:    BinOp -> 'PLUS' . 
-  actions:    action 'LPAR' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'RPAR' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'LBRACKET' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'RBRACKET' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'LCURLY' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'RCURLY' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'FUN' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'FN' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'COMMA' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'SEMICOLON' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'READ' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'WRITE' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'DEQ' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'LTH' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'EQ' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'OP' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'MAP' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'REDUCE' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'IOTA' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'ARROW' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'REPLICATE' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'SCAN' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'FILTER' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'AND' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'OR' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'NOT' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'NEGATE' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'TIMES' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'DIVIDE' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'PLUS' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'MINUS' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'LESS' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'INT' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'CHAR' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'BOOL' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'IF' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'THEN' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'ELSE' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'LET' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'IN' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'EOF' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'ID' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'STRINGLIT' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'BOOLLIT' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'CHARLIT' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'NUM' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action 'error' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action '#' (explicit left 9993):   reduce BinOp --> 'PLUS'
-    action '$$' (explicit left 9993):   reduce BinOp --> 'PLUS'
+  actions:    action 'LPAR' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'RPAR' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'LBRACKET' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'RBRACKET' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'LCURLY' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'RCURLY' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'FUN' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'FN' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'COMMA' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'SEMICOLON' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'READ' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'WRITE' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'DEQ' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'LTH' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'EQ' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'OP' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'MAP' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'REDUCE' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'IOTA' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'ARROW' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'REPLICATE' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'SCAN' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'FILTER' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'AND' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'OR' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'NOT' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'NEGATE' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'TIMES' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'DIVIDE' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'PLUS' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'MINUS' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'LESS' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'INT' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'CHAR' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'BOOL' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'IF' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'THEN' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'ELSE' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'LET' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'IN' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'EOF' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'ID' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'STRINGLIT' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'BOOLLIT' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'CHARLIT' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'NUM' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action 'error' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action '#' (explicit left 9997):   reduce BinOp --> 'PLUS'
+    action '$$' (explicit left 9997):   reduce BinOp --> 'PLUS'
   immediate action:   reduce BinOp --> 'PLUS'  gotos:state 28:  items:    Exp -> 'NUM' . 
   actions:    action 'LPAR' (noprec):   reduce Exp --> 'NUM'
     action 'RPAR' (noprec):   reduce Exp --> 'NUM'
@@ -1665,8 +1665,8 @@ state 26:  items:    Params -> Type 'ID' 'COMMA' Params .
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -1699,55 +1699,55 @@ state 33:  items:    Exp -> 'NOT' Exp .
     Exp -> Exp . 'AND' Exp
     Exp -> Exp . 'TIMES' Exp
     Exp -> Exp . 'DIVIDE' Exp
-  actions:    action 'LPAR' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'RPAR' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'LBRACKET' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'RBRACKET' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'LCURLY' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'RCURLY' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'FUN' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'FN' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'COMMA' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'SEMICOLON' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'READ' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'WRITE' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'DEQ' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'LTH' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'EQ' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'OP' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'MAP' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'REDUCE' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'IOTA' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'ARROW' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'REPLICATE' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'SCAN' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'FILTER' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'AND' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'OR' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'NOT' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'NEGATE' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'TIMES' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'DIVIDE' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'PLUS' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'MINUS' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'LESS' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'INT' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'CHAR' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'BOOL' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'IF' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'THEN' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'ELSE' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'LET' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'IN' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'EOF' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'ID' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'STRINGLIT' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'BOOLLIT' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'CHARLIT' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'NUM' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action 'error' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action '#' (explicit left 9998):   reduce Exp --> 'NOT' Exp
-    action '$$' (explicit left 9998):   reduce Exp --> 'NOT' Exp
+  actions:    action 'LPAR' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'RPAR' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'LBRACKET' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'RBRACKET' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'LCURLY' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'RCURLY' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'FUN' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'FN' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'COMMA' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'SEMICOLON' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'READ' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'WRITE' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'DEQ' (explicit left 9996):   shift 72
+    action 'LTH' (explicit left 9996):   shift 73
+    action 'EQ' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'OP' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'MAP' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'REDUCE' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'IOTA' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'ARROW' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'REPLICATE' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'SCAN' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'FILTER' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'AND' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'OR' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'NOT' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'NEGATE' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
+    action 'LESS' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'INT' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'CHAR' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'BOOL' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'IF' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'THEN' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'ELSE' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'LET' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'IN' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'EOF' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'ID' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'STRINGLIT' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'BOOLLIT' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'CHARLIT' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'NUM' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action 'error' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action '#' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
+    action '$$' (explicit nonassoc 9995):   reduce Exp --> 'NOT' Exp
   immediate action: <none>  gotos:state 34:  items:    Exp -> 'STRINGLIT' . 
   actions:    action 'LPAR' (noprec):   reduce Exp --> 'STRINGLIT'
     action 'RPAR' (noprec):   reduce Exp --> 'STRINGLIT'
@@ -1824,8 +1824,8 @@ state 33:  items:    Exp -> 'NOT' Exp .
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -1858,55 +1858,55 @@ state 36:  items:    Exp -> 'NEGATE' Exp .
     Exp -> Exp . 'AND' Exp
     Exp -> Exp . 'TIMES' Exp
     Exp -> Exp . 'DIVIDE' Exp
-  actions:    action 'LPAR' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'RPAR' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'LBRACKET' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'RBRACKET' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'LCURLY' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'RCURLY' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'FUN' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'FN' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'COMMA' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'SEMICOLON' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'READ' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'WRITE' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'DEQ' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'LTH' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'EQ' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'OP' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'MAP' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'REDUCE' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'IOTA' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'ARROW' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'REPLICATE' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'SCAN' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'FILTER' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'AND' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'OR' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'NOT' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'NEGATE' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'TIMES' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'DIVIDE' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'PLUS' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'MINUS' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'LESS' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'INT' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'CHAR' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'BOOL' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'IF' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'THEN' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'ELSE' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'LET' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'IN' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'EOF' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'ID' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'STRINGLIT' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'BOOLLIT' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'CHARLIT' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'NUM' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action 'error' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action '#' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
-    action '$$' (explicit left 9999):   reduce Exp --> 'NEGATE' Exp
+  actions:    action 'LPAR' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'RPAR' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'LBRACKET' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'RBRACKET' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'LCURLY' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'RCURLY' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'FUN' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'FN' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'COMMA' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'SEMICOLON' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'READ' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'WRITE' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'DEQ' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'LTH' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'EQ' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'OP' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'MAP' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'REDUCE' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'IOTA' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'ARROW' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'REPLICATE' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'SCAN' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'FILTER' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'AND' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'OR' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'NOT' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'NEGATE' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'TIMES' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'DIVIDE' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'PLUS' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'MINUS' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'LESS' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'INT' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'CHAR' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'BOOL' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'IF' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'THEN' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'ELSE' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'LET' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'IN' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'EOF' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'ID' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'STRINGLIT' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'BOOLLIT' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'CHARLIT' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'NUM' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action 'error' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action '#' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
+    action '$$' (explicit nonassoc 9999):   reduce Exp --> 'NEGATE' Exp
   immediate action: <none>  gotos:state 37:  items:    Exp -> 'LCURLY' . Exps 'RCURLY'
   actions:    action 'LPAR' (noprec):   shift 126
     action 'RPAR' (noprec):   error
@@ -1933,8 +1933,8 @@ state 36:  items:    Exp -> 'NEGATE' Exp .
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -2068,55 +2068,55 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     Exp -> Exp . 'AND' Exp
     Exp -> Exp . 'TIMES' Exp
     Exp -> Exp . 'DIVIDE' Exp
-  actions:    action 'LPAR' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'RPAR' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'LBRACKET' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'RBRACKET' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'LCURLY' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'RCURLY' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'FUN' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'FN' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'COMMA' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'SEMICOLON' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'READ' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'WRITE' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'DEQ' (explicit left 9996):   shift 72
-    action 'LTH' (explicit left 9996):   shift 73
-    action 'EQ' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'OP' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'MAP' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'REDUCE' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'IOTA' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'ARROW' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'REPLICATE' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'SCAN' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'FILTER' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
-    action 'NOT' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'NEGATE' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'MINUS' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'LESS' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'INT' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'CHAR' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'BOOL' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'IF' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'THEN' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'ELSE' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'LET' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'IN' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'EOF' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'ID' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'STRINGLIT' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'BOOLLIT' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'CHARLIT' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'NUM' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action 'error' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action '#' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
-    action '$$' (explicit left 9993):   reduce Exp --> Exp 'PLUS' Exp
+  actions:    action 'LPAR' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'RPAR' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'LBRACKET' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'RBRACKET' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'LCURLY' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'RCURLY' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'FUN' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'FN' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'COMMA' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'SEMICOLON' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'READ' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'WRITE' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'DEQ' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'LTH' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'EQ' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'OP' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'MAP' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'REDUCE' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'IOTA' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'ARROW' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'REPLICATE' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'SCAN' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'FILTER' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'AND' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'OR' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'NOT' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'NEGATE' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'MINUS' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'LESS' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'INT' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'CHAR' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'BOOL' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'IF' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'THEN' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'ELSE' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'LET' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'IN' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'EOF' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'ID' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'STRINGLIT' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'BOOLLIT' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'CHARLIT' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'NUM' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action 'error' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action '#' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
+    action '$$' (explicit left 9997):   reduce Exp --> Exp 'PLUS' Exp
   immediate action: <none>  gotos:state 41:  items:    Exp -> Exp . 'PLUS' Exp
     Exp -> Exp . 'MINUS' Exp
     Exp -> Exp 'MINUS' Exp . 
@@ -2126,55 +2126,55 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     Exp -> Exp . 'AND' Exp
     Exp -> Exp . 'TIMES' Exp
     Exp -> Exp . 'DIVIDE' Exp
-  actions:    action 'LPAR' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'RPAR' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'LBRACKET' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'RBRACKET' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'LCURLY' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'RCURLY' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'FUN' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'FN' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'COMMA' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'SEMICOLON' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'READ' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'WRITE' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'DEQ' (explicit left 9996):   shift 72
-    action 'LTH' (explicit left 9996):   shift 73
-    action 'EQ' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'OP' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'MAP' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'REDUCE' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'IOTA' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'ARROW' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'REPLICATE' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'SCAN' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'FILTER' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
-    action 'NOT' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'NEGATE' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'MINUS' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'LESS' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'INT' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'CHAR' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'BOOL' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'IF' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'THEN' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'ELSE' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'LET' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'IN' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'EOF' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'ID' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'STRINGLIT' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'BOOLLIT' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'CHARLIT' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'NUM' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action 'error' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action '#' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
-    action '$$' (explicit left 9993):   reduce Exp --> Exp 'MINUS' Exp
+  actions:    action 'LPAR' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'RPAR' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'LBRACKET' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'RBRACKET' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'LCURLY' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'RCURLY' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'FUN' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'FN' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'COMMA' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'SEMICOLON' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'READ' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'WRITE' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'DEQ' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'LTH' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'EQ' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'OP' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'MAP' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'REDUCE' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'IOTA' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'ARROW' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'REPLICATE' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'SCAN' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'FILTER' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'AND' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'OR' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'NOT' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'NEGATE' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'MINUS' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'LESS' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'INT' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'CHAR' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'BOOL' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'IF' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'THEN' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'ELSE' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'LET' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'IN' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'EOF' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'ID' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'STRINGLIT' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'BOOLLIT' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'CHARLIT' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'NUM' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action 'error' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action '#' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
+    action '$$' (explicit left 9997):   reduce Exp --> Exp 'MINUS' Exp
   immediate action: <none>  gotos:state 42:  items:    Exp -> Exp . 'PLUS' Exp
     Exp -> Exp . 'MINUS' Exp
     Exp -> Exp . 'DEQ' Exp
@@ -2211,10 +2211,10 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'OR' (explicit left 9996):   reduce Exp --> Exp 'DEQ' Exp
     action 'NOT' (explicit left 9996):   reduce Exp --> Exp 'DEQ' Exp
     action 'NEGATE' (explicit left 9996):   reduce Exp --> Exp 'DEQ' Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9996):   reduce Exp --> Exp 'DEQ' Exp
-    action 'MINUS' (explicit left 9996):   reduce Exp --> Exp 'DEQ' Exp
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (explicit left 9996):   reduce Exp --> Exp 'DEQ' Exp
     action 'INT' (explicit left 9996):   reduce Exp --> Exp 'DEQ' Exp
     action 'CHAR' (explicit left 9996):   reduce Exp --> Exp 'DEQ' Exp
@@ -2269,10 +2269,10 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'OR' (explicit left 9996):   reduce Exp --> Exp 'LTH' Exp
     action 'NOT' (explicit left 9996):   reduce Exp --> Exp 'LTH' Exp
     action 'NEGATE' (explicit left 9996):   reduce Exp --> Exp 'LTH' Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9996):   reduce Exp --> Exp 'LTH' Exp
-    action 'MINUS' (explicit left 9996):   reduce Exp --> Exp 'LTH' Exp
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (explicit left 9996):   reduce Exp --> Exp 'LTH' Exp
     action 'INT' (explicit left 9996):   reduce Exp --> Exp 'LTH' Exp
     action 'CHAR' (explicit left 9996):   reduce Exp --> Exp 'LTH' Exp
@@ -2300,55 +2300,55 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     Exp -> Exp . 'AND' Exp
     Exp -> Exp . 'TIMES' Exp
     Exp -> Exp . 'DIVIDE' Exp
-  actions:    action 'LPAR' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'RPAR' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'LBRACKET' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'RBRACKET' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'LCURLY' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'RCURLY' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'FUN' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'FN' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'COMMA' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'SEMICOLON' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'READ' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'WRITE' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
+  actions:    action 'LPAR' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'RPAR' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'LBRACKET' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'RBRACKET' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'LCURLY' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'RCURLY' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'FUN' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'FN' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'COMMA' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'SEMICOLON' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'READ' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'WRITE' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
     action 'DEQ' (explicit left 9996):   shift 72
     action 'LTH' (explicit left 9996):   shift 73
-    action 'EQ' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'OP' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'MAP' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'REDUCE' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'IOTA' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'ARROW' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'REPLICATE' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'SCAN' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'FILTER' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'NOT' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'NEGATE' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'MINUS' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'LESS' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'INT' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'CHAR' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'BOOL' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'IF' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'THEN' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'ELSE' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'LET' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'IN' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'EOF' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'ID' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'STRINGLIT' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'BOOLLIT' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'CHARLIT' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'NUM' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action 'error' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action '#' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
-    action '$$' (explicit left 9994):   reduce Exp --> Exp 'OR' Exp
+    action 'EQ' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'OP' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'MAP' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'REDUCE' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'IOTA' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'ARROW' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'REPLICATE' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'SCAN' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'FILTER' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'NOT' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'NEGATE' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
+    action 'LESS' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'INT' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'CHAR' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'BOOL' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'IF' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'THEN' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'ELSE' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'LET' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'IN' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'EOF' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'ID' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'STRINGLIT' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'BOOLLIT' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'CHARLIT' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'NUM' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action 'error' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action '#' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
+    action '$$' (explicit left 9993):   reduce Exp --> Exp 'OR' Exp
   immediate action: <none>  gotos:state 45:  items:    Exp -> Exp . 'PLUS' Exp
     Exp -> Exp . 'MINUS' Exp
     Exp -> Exp . 'DEQ' Exp
@@ -2358,55 +2358,55 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     Exp -> Exp 'AND' Exp . 
     Exp -> Exp . 'TIMES' Exp
     Exp -> Exp . 'DIVIDE' Exp
-  actions:    action 'LPAR' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'RPAR' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'LBRACKET' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'RBRACKET' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'LCURLY' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'RCURLY' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'FUN' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'FN' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'COMMA' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'SEMICOLON' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'READ' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'WRITE' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
+  actions:    action 'LPAR' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'RPAR' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'LBRACKET' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'RBRACKET' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'LCURLY' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'RCURLY' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'FUN' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'FN' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'COMMA' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'SEMICOLON' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'READ' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'WRITE' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
     action 'DEQ' (explicit left 9996):   shift 72
     action 'LTH' (explicit left 9996):   shift 73
-    action 'EQ' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'OP' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'MAP' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'REDUCE' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'IOTA' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'ARROW' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'REPLICATE' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'SCAN' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'FILTER' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'AND' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'OR' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'NOT' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'NEGATE' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'MINUS' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'LESS' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'INT' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'CHAR' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'BOOL' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'IF' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'THEN' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'ELSE' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'LET' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'IN' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'EOF' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'ID' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'STRINGLIT' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'BOOLLIT' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'CHARLIT' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'NUM' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action 'error' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action '#' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
-    action '$$' (explicit left 9995):   reduce Exp --> Exp 'AND' Exp
+    action 'EQ' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'OP' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'MAP' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'REDUCE' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'IOTA' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'ARROW' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'REPLICATE' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'SCAN' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'FILTER' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'AND' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'OR' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'NOT' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'NEGATE' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
+    action 'LESS' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'INT' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'CHAR' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'BOOL' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'IF' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'THEN' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'ELSE' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'LET' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'IN' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'EOF' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'ID' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'STRINGLIT' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'BOOLLIT' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'CHARLIT' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'NUM' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action 'error' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action '#' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
+    action '$$' (explicit left 9994):   reduce Exp --> Exp 'AND' Exp
   immediate action: <none>  gotos:state 46:  items:    Exp -> Exp . 'PLUS' Exp
     Exp -> Exp . 'MINUS' Exp
     Exp -> Exp . 'DEQ' Exp
@@ -2416,55 +2416,55 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     Exp -> Exp . 'TIMES' Exp
     Exp -> Exp 'TIMES' Exp . 
     Exp -> Exp . 'DIVIDE' Exp
-  actions:    action 'LPAR' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'RPAR' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'LBRACKET' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'RBRACKET' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'LCURLY' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'RCURLY' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'FUN' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'FN' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'COMMA' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'SEMICOLON' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'READ' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'WRITE' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'DEQ' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'LTH' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'EQ' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'OP' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'MAP' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'REDUCE' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'IOTA' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'ARROW' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'REPLICATE' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'SCAN' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'FILTER' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'AND' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'OR' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'NOT' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'NEGATE' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'TIMES' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'DIVIDE' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'PLUS' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'MINUS' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'LESS' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'INT' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'CHAR' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'BOOL' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'IF' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'THEN' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'ELSE' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'LET' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'IN' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'EOF' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'ID' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'STRINGLIT' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'BOOLLIT' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'CHARLIT' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'NUM' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action 'error' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action '#' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
-    action '$$' (explicit left 9997):   reduce Exp --> Exp 'TIMES' Exp
+  actions:    action 'LPAR' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'RPAR' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'LBRACKET' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'RBRACKET' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'LCURLY' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'RCURLY' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'FUN' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'FN' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'COMMA' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'SEMICOLON' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'READ' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'WRITE' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'DEQ' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'LTH' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'EQ' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'OP' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'MAP' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'REDUCE' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'IOTA' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'ARROW' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'REPLICATE' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'SCAN' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'FILTER' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'AND' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'OR' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'NOT' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'NEGATE' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'TIMES' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'DIVIDE' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'PLUS' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'MINUS' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'LESS' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'INT' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'CHAR' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'BOOL' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'IF' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'THEN' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'ELSE' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'LET' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'IN' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'EOF' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'ID' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'STRINGLIT' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'BOOLLIT' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'CHARLIT' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'NUM' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action 'error' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action '#' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
+    action '$$' (explicit left 9998):   reduce Exp --> Exp 'TIMES' Exp
   immediate action: <none>  gotos:state 47:  items:    Exp -> Exp . 'PLUS' Exp
     Exp -> Exp . 'MINUS' Exp
     Exp -> Exp . 'DEQ' Exp
@@ -2474,55 +2474,55 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     Exp -> Exp . 'TIMES' Exp
     Exp -> Exp . 'DIVIDE' Exp
     Exp -> Exp 'DIVIDE' Exp . 
-  actions:    action 'LPAR' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'RPAR' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'LBRACKET' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'RBRACKET' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'LCURLY' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'RCURLY' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'FUN' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'FN' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'COMMA' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'SEMICOLON' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'READ' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'WRITE' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'DEQ' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'LTH' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'EQ' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'OP' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'MAP' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'REDUCE' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'IOTA' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'ARROW' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'REPLICATE' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'SCAN' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'FILTER' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'AND' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'OR' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'NOT' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'NEGATE' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'TIMES' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'DIVIDE' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'PLUS' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'MINUS' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'LESS' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'INT' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'CHAR' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'BOOL' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'IF' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'THEN' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'ELSE' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'LET' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'IN' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'EOF' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'ID' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'STRINGLIT' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'BOOLLIT' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'CHARLIT' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'NUM' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action 'error' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action '#' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
-    action '$$' (explicit left 9997):   reduce Exp --> Exp 'DIVIDE' Exp
+  actions:    action 'LPAR' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'RPAR' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'LBRACKET' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'RBRACKET' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'LCURLY' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'RCURLY' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'FUN' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'FN' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'COMMA' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'SEMICOLON' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'READ' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'WRITE' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'DEQ' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'LTH' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'EQ' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'OP' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'MAP' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'REDUCE' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'IOTA' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'ARROW' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'REPLICATE' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'SCAN' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'FILTER' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'AND' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'OR' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'NOT' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'NEGATE' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'TIMES' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'DIVIDE' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'PLUS' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'MINUS' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'LESS' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'INT' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'CHAR' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'BOOL' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'IF' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'THEN' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'ELSE' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'LET' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'IN' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'EOF' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'ID' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'STRINGLIT' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'BOOLLIT' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'CHARLIT' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'NUM' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action 'error' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action '#' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
+    action '$$' (explicit left 9998):   reduce Exp --> Exp 'DIVIDE' Exp
   immediate action: <none>  gotos:state 48:  items:    Exp -> Exp . 'PLUS' Exp
     Exp -> Exp . 'MINUS' Exp
     Exp -> Exp . 'DEQ' Exp
@@ -2555,14 +2555,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -2613,14 +2613,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -2671,14 +2671,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (explicit nonassoc 9992):   reduce Exp --> 'IF' Exp 'THEN' Exp 'ELSE' Exp
     action 'SCAN' (explicit nonassoc 9992):   reduce Exp --> 'IF' Exp 'THEN' Exp 'ELSE' Exp
     action 'FILTER' (explicit nonassoc 9992):   reduce Exp --> 'IF' Exp 'THEN' Exp 'ELSE' Exp
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (explicit nonassoc 9992):   reduce Exp --> 'IF' Exp 'THEN' Exp 'ELSE' Exp
     action 'NEGATE' (explicit nonassoc 9992):   reduce Exp --> 'IF' Exp 'THEN' Exp 'ELSE' Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (explicit nonassoc 9992):   reduce Exp --> 'IF' Exp 'THEN' Exp 'ELSE' Exp
     action 'INT' (explicit nonassoc 9992):   reduce Exp --> 'IF' Exp 'THEN' Exp 'ELSE' Exp
     action 'CHAR' (explicit nonassoc 9992):   reduce Exp --> 'IF' Exp 'THEN' Exp 'ELSE' Exp
@@ -2729,14 +2729,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -2787,14 +2787,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -2845,14 +2845,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -2903,14 +2903,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -2961,14 +2961,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -3019,14 +3019,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -3077,14 +3077,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -3135,14 +3135,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -3193,14 +3193,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -3251,14 +3251,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -3309,14 +3309,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -3367,14 +3367,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -3425,14 +3425,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -3483,14 +3483,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (explicit nonassoc 9992):   reduce Exp --> 'LET' Decls 'IN' Exp
     action 'SCAN' (explicit nonassoc 9992):   reduce Exp --> 'LET' Decls 'IN' Exp
     action 'FILTER' (explicit nonassoc 9992):   reduce Exp --> 'LET' Decls 'IN' Exp
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (explicit nonassoc 9992):   reduce Exp --> 'LET' Decls 'IN' Exp
     action 'NEGATE' (explicit nonassoc 9992):   reduce Exp --> 'LET' Decls 'IN' Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (explicit nonassoc 9992):   reduce Exp --> 'LET' Decls 'IN' Exp
     action 'INT' (explicit nonassoc 9992):   reduce Exp --> 'LET' Decls 'IN' Exp
     action 'CHAR' (explicit nonassoc 9992):   reduce Exp --> 'LET' Decls 'IN' Exp
@@ -3541,14 +3541,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   error
     action 'SCAN' (noprec):   error
     action 'FILTER' (noprec):   error
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   error
     action 'NEGATE' (noprec):   error
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
     action 'CHAR' (noprec):   error
@@ -3600,14 +3600,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   reduce Exps --> Exp
     action 'SCAN' (noprec):   reduce Exps --> Exp
     action 'FILTER' (noprec):   reduce Exps --> Exp
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   reduce Exps --> Exp
     action 'NEGATE' (noprec):   reduce Exps --> Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   reduce Exps --> Exp
     action 'INT' (noprec):   reduce Exps --> Exp
     action 'CHAR' (noprec):   reduce Exps --> Exp
@@ -3658,14 +3658,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   reduce Decl --> 'ID' 'EQ' Exp
     action 'SCAN' (noprec):   reduce Decl --> 'ID' 'EQ' Exp
     action 'FILTER' (noprec):   reduce Decl --> 'ID' 'EQ' Exp
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   reduce Decl --> 'ID' 'EQ' Exp
     action 'NEGATE' (noprec):   reduce Decl --> 'ID' 'EQ' Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   reduce Decl --> 'ID' 'EQ' Exp
     action 'INT' (noprec):   reduce Decl --> 'ID' 'EQ' Exp
     action 'CHAR' (noprec):   reduce Decl --> 'ID' 'EQ' Exp
@@ -3716,14 +3716,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' 'RPAR' 'ARROW' Exp
     action 'SCAN' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' 'RPAR' 'ARROW' Exp
     action 'FILTER' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' 'RPAR' 'ARROW' Exp
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' 'RPAR' 'ARROW' Exp
     action 'NEGATE' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' 'RPAR' 'ARROW' Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' 'RPAR' 'ARROW' Exp
     action 'INT' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' 'RPAR' 'ARROW' Exp
     action 'CHAR' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' 'RPAR' 'ARROW' Exp
@@ -3774,14 +3774,14 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'REPLICATE' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' Params 'RPAR' 'ARROW' Exp
     action 'SCAN' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' Params 'RPAR' 'ARROW' Exp
     action 'FILTER' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' Params 'RPAR' 'ARROW' Exp
-    action 'AND' (explicit left 9995):   shift 75
-    action 'OR' (explicit left 9994):   shift 74
+    action 'AND' (explicit left 9994):   shift 75
+    action 'OR' (explicit left 9993):   shift 74
     action 'NOT' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' Params 'RPAR' 'ARROW' Exp
     action 'NEGATE' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' Params 'RPAR' 'ARROW' Exp
-    action 'TIMES' (explicit left 9997):   shift 76
-    action 'DIVIDE' (explicit left 9997):   shift 77
-    action 'PLUS' (explicit left 9993):   shift 70
-    action 'MINUS' (explicit left 9993):   shift 71
+    action 'TIMES' (explicit left 9998):   shift 76
+    action 'DIVIDE' (explicit left 9998):   shift 77
+    action 'PLUS' (explicit left 9997):   shift 70
+    action 'MINUS' (explicit left 9997):   shift 71
     action 'LESS' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' Params 'RPAR' 'ARROW' Exp
     action 'INT' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' Params 'RPAR' 'ARROW' Exp
     action 'CHAR' (noprec):   reduce FunArg --> 'FN' Type 'LPAR' Params 'RPAR' 'ARROW' Exp
@@ -3826,8 +3826,8 @@ state 38:  items:    Exp -> 'LCURLY' Exps . 'RCURLY'
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -3877,8 +3877,8 @@ state 71:  items:    Exp -> Exp 'MINUS' . Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -3928,8 +3928,8 @@ state 72:  items:    Exp -> Exp 'DEQ' . Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -3979,8 +3979,8 @@ state 73:  items:    Exp -> Exp 'LTH' . Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -4030,8 +4030,8 @@ state 74:  items:    Exp -> Exp 'OR' . Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -4081,8 +4081,8 @@ state 75:  items:    Exp -> Exp 'AND' . Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -4132,8 +4132,8 @@ state 76:  items:    Exp -> Exp 'TIMES' . Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -4183,8 +4183,8 @@ state 77:  items:    Exp -> Exp 'DIVIDE' . Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -4234,8 +4234,8 @@ state 78:  items:    Exp -> 'IF' . Exp 'THEN' Exp 'ELSE' Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -4285,8 +4285,8 @@ state 79:  items:    Exp -> 'IF' Exp 'THEN' . Exp 'ELSE' Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -4336,8 +4336,8 @@ state 80:  items:    Exp -> 'IF' Exp 'THEN' Exp 'ELSE' . Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -4388,8 +4388,8 @@ state 81:  items:    Exp -> 'ID' 'LPAR' . Exps 'RPAR'
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -4841,8 +4841,8 @@ state 87:  items:    Exp -> 'READ' 'LPAR' Type . 'RPAR'
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -4992,8 +4992,8 @@ state 91:  items:    Exp -> 'WRITE' 'LPAR' Exp 'RPAR' .
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -5244,8 +5244,8 @@ state 97:  items:    Exp -> 'MAP' 'LPAR' FunArg . 'COMMA' Exp 'RPAR'
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -5498,8 +5498,8 @@ state 102:  items:    Exp -> 'REDUCE' 'LPAR' FunArg . 'COMMA' Exp 'COMMA' Exp 'R
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -5549,8 +5549,8 @@ state 104:  items:    Exp -> 'REDUCE' 'LPAR' FunArg 'COMMA' Exp 'COMMA' . Exp 'R
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -5654,7 +5654,7 @@ state 105:  items:    Exp -> 'REDUCE' 'LPAR' FunArg 'COMMA' Exp 'COMMA' Exp 'RPA
     action 'NEGATE' (noprec):   error
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
-    action 'PLUS' (explicit left 9993):   shift 27
+    action 'PLUS' (explicit left 9997):   shift 27
     action 'MINUS' (noprec):   error
     action 'LESS' (noprec):   error
     action 'INT' (noprec):   error
@@ -5751,8 +5751,8 @@ state 107:  items:    Exp -> 'REDUCE' 'LPAR' 'OP' BinOp . 'COMMA' Exp 'COMMA' Ex
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -5802,8 +5802,8 @@ state 109:  items:    Exp -> 'REDUCE' 'LPAR' 'OP' BinOp 'COMMA' Exp 'COMMA' . Ex
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -5953,8 +5953,8 @@ state 110:  items:    Exp -> 'REDUCE' 'LPAR' 'OP' BinOp 'COMMA' Exp 'COMMA' Exp 
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -6004,8 +6004,8 @@ state 113:  items:    Exp -> 'REPLICATE' 'LPAR' Exp 'COMMA' . Exp 'RPAR'
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -6256,8 +6256,8 @@ state 117:  items:    Exp -> 'FILTER' 'LPAR' FunArg . 'COMMA' Exp 'RPAR'
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -6508,8 +6508,8 @@ state 122:  items:    Exp -> 'SCAN' 'LPAR' FunArg . 'COMMA' Exp 'COMMA' Exp 'RPA
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -6559,8 +6559,8 @@ state 124:  items:    Exp -> 'SCAN' 'LPAR' FunArg 'COMMA' Exp 'COMMA' . Exp 'RPA
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -6660,8 +6660,8 @@ state 125:  items:    Exp -> 'SCAN' 'LPAR' FunArg 'COMMA' Exp 'COMMA' Exp 'RPAR'
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -6863,8 +6863,8 @@ state 129:  items:    Exp -> 'LET' Decls . 'IN' Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -6914,8 +6914,8 @@ state 131:  items:    Exp -> 'ID' 'LBRACKET' . Exp 'RBRACKET'
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -7015,8 +7015,8 @@ state 132:  items:    Exp -> 'ID' 'LBRACKET' Exp 'RBRACKET' .
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -7167,8 +7167,8 @@ state 134:  items:    Exps -> Exp 'COMMA' Exps .
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -7627,8 +7627,8 @@ state 144:  items:    FunArg -> 'FN' Type 'LPAR' 'RPAR' . 'ARROW' Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error
@@ -7778,8 +7778,8 @@ state 146:  items:    FunArg -> 'FN' Type 'LPAR' Params . 'RPAR' 'ARROW' Exp
     action 'FILTER' (noprec):   shift 115
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
-    action 'NOT' (explicit left 9998):   shift 32
-    action 'NEGATE' (explicit left 9999):   shift 35
+    action 'NOT' (explicit nonassoc 9995):   shift 32
+    action 'NEGATE' (explicit nonassoc 9999):   shift 35
     action 'TIMES' (noprec):   error
     action 'DIVIDE' (noprec):   error
     action 'PLUS' (noprec):   error

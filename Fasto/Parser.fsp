@@ -53,13 +53,13 @@ let parse_error_rich =
 %token <Position> LPAR RPAR LBRACKET RBRACKET LCURLY RCURLY
 
 %nonassoc ifprec letprec semiprec
-%left PLUS MINUS
 %left OR
 %left AND
+%nonassoc NOT
 %left DEQ LTH
+%left PLUS MINUS
 %left TIMES DIVIDE
-%left NOT
-%left NEGATE
+%nonassoc NEGATE
 
 %start Prog
 %type <AbSyn.UntypedProg> Prog

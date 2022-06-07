@@ -40,7 +40,6 @@ let rec copyConstPropFoldExp (vtable : VarTable)
             *)
             let e' = copyConstPropFoldExp vtable e
             match SymTab.lookup name vtable with
-              | Some (ConstProp x)  -> Constant(x, pos)
               | Some (VarProp y)    -> Index(y, e', t, pos)
               | _                   -> Index(name, e', t, pos)
 
@@ -80,7 +79,10 @@ let rec copyConstPropFoldExp (vtable : VarTable)
                     //            Let (Dec (name2, e2, decpos2), b, pos)) vtable) body
                     // copyConstPropFoldExp (Let (Dec (name, e, decpos),
                     copyConstPropFoldExp vtable (Let (Dec (name2, e2, decpos), 
-                                                    Let (Dec (name, b, decpos2), body, pos2), pos))
+                                                    Let (Dec (name, b, decpos2), 
+                                                    body, 
+                                                    pos2), 
+                                                    pos))
                 | _ -> (* Fallthrough - for everything else, do nothing *)
                     let body' = copyConstPropFoldExp vtable body
                     Let (Dec (name, e', decpos), body', pos)

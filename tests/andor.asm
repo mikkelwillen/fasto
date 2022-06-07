@@ -20,35 +20,64 @@ _stop_:
 # Function main
 main:
 	sw	$31, -4($29)
-	addi	$29, $29, -8
+	sw	$16, -8($29)
+	addi	$29, $29, -12
+	ori	$16, $0, 1
+# was:	ori	_letBind_2_, $0, 1
+	ori	$4, $0, 0
+# was:	ori	_And_L_5_, $0, 0
 	ori	$3, $0, 0
-# was:	ori	_tmp_3_, $0, 0
-# 	ori	_letBind_2_,_tmp_3_,0
+# was:	ori	_falseReg_7_, $0, 0
+	ori	$2, $0, 0
+# was:	ori	_tmp_4_, $0, 0
+	beq	$4, $3, _false_8_
+# was:	beq	_And_L_5_, _falseReg_7_, _false_8_
+# 	ori	_And_R_6_,_letBind_2_,0
+	beq	$16, $3, _false_8_
+# was:	beq	_And_R_6_, _falseReg_7_, _false_8_
+	ori	$2, $0, 1
+# was:	ori	_tmp_4_, $0, 1
+_false_8_:
+	ori	$3, $2, 0
+# was:	ori	_letBind_3_, _tmp_4_, 0
 	la	$2, _true
 # was:	la	$2, _true
-	bne	$3, $0, _wBoolF_4_
-# was:	bne	_letBind_2_, $0, _wBoolF_4_
+	bne	$3, $0, _wBoolF_9_
+# was:	bne	_letBind_3_, $0, _wBoolF_9_
 	la	$2, _false
 # was:	la	$2, _false
-_wBoolF_4_:
+_wBoolF_9_:
 	jal	putstring
 # was:	jal	putstring, $2
+	ori	$4, $0, 1
+# was:	ori	_Or_L_12_, $0, 1
+	ori	$2, $0, 1
+# was:	ori	_trueReg_14_, $0, 1
 	ori	$3, $0, 1
-# was:	ori	_tmp_6_, $0, 1
-# 	ori	_letBind_5_,_tmp_6_,0
+# was:	ori	_tmp_11_, $0, 1
+	beq	$4, $2, _true_15_
+# was:	beq	_Or_L_12_, _trueReg_14_, _true_15_
+# 	ori	_Or_R_13_,_letBind_2_,0
+	beq	$16, $2, _true_15_
+# was:	beq	_Or_R_13_, _trueReg_14_, _true_15_
+	ori	$3, $0, 0
+# was:	ori	_tmp_11_, $0, 0
+_true_15_:
+# 	ori	_letBind_10_,_tmp_11_,0
 	la	$2, _true
 # was:	la	$2, _true
-	bne	$3, $0, _wBoolF_7_
-# was:	bne	_letBind_5_, $0, _wBoolF_7_
+	bne	$3, $0, _wBoolF_16_
+# was:	bne	_letBind_10_, $0, _wBoolF_16_
 	la	$2, _false
 # was:	la	$2, _false
-_wBoolF_7_:
+_wBoolF_16_:
 	jal	putstring
 # was:	jal	putstring, $2
 	ori	$2, $0, 1
 # was:	ori	_mainres_1_, $0, 1
 # 	ori	$2,_mainres_1_,0
-	addi	$29, $29, 8
+	addi	$29, $29, 12
+	lw	$16, -8($29)
 	lw	$31, -4($29)
 	jr	$31
 ord:

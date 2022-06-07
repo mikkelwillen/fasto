@@ -17,38 +17,81 @@
 _stop_:
 	ori	$2, $0, 10
 	syscall
+# Function no_way
+no_way:
+	sw	$31, -4($29)
+	addi	$29, $29, -8
+	jal	no_way
+# was:	jal	no_way, 
+# 	ori	_no_wayres_1_,$2,0
+# 	ori	$2,_no_wayres_1_,0
+	addi	$29, $29, 8
+	lw	$31, -4($29)
+	jr	$31
 # Function main
 main:
 	sw	$31, -4($29)
-	addi	$29, $29, -8
+	sw	$17, -12($29)
+	sw	$16, -8($29)
+	addi	$29, $29, -16
 	ori	$3, $0, 0
-# was:	ori	_tmp_3_, $0, 0
-# 	ori	_letBind_2_,_tmp_3_,0
+# was:	ori	_And_L_5_, $0, 0
+	ori	$17, $0, 0
+# was:	ori	_falseReg_7_, $0, 0
+	ori	$16, $0, 0
+# was:	ori	_tmp_4_, $0, 0
+	beq	$3, $17, _false_8_
+# was:	beq	_And_L_5_, _falseReg_7_, _false_8_
+	jal	no_way
+# was:	jal	no_way, 
+# 	ori	_And_R_6_,$2,0
+	beq	$2, $17, _false_8_
+# was:	beq	_And_R_6_, _falseReg_7_, _false_8_
+	ori	$16, $0, 1
+# was:	ori	_tmp_4_, $0, 1
+_false_8_:
+# 	ori	_letBind_3_,_tmp_4_,0
 	la	$2, _true
 # was:	la	$2, _true
-	bne	$3, $0, _wBoolF_4_
-# was:	bne	_letBind_2_, $0, _wBoolF_4_
+	bne	$16, $0, _wBoolF_9_
+# was:	bne	_letBind_3_, $0, _wBoolF_9_
 	la	$2, _false
 # was:	la	$2, _false
-_wBoolF_4_:
+_wBoolF_9_:
 	jal	putstring
 # was:	jal	putstring, $2
 	ori	$3, $0, 1
-# was:	ori	_tmp_6_, $0, 1
-# 	ori	_letBind_5_,_tmp_6_,0
+# was:	ori	_Or_L_12_, $0, 1
+	ori	$16, $0, 1
+# was:	ori	_trueReg_14_, $0, 1
+	ori	$17, $0, 1
+# was:	ori	_tmp_11_, $0, 1
+	beq	$3, $16, _true_15_
+# was:	beq	_Or_L_12_, _trueReg_14_, _true_15_
+	jal	no_way
+# was:	jal	no_way, 
+# 	ori	_Or_R_13_,$2,0
+	beq	$2, $16, _true_15_
+# was:	beq	_Or_R_13_, _trueReg_14_, _true_15_
+	ori	$17, $0, 0
+# was:	ori	_tmp_11_, $0, 0
+_true_15_:
+# 	ori	_letBind_10_,_tmp_11_,0
 	la	$2, _true
 # was:	la	$2, _true
-	bne	$3, $0, _wBoolF_7_
-# was:	bne	_letBind_5_, $0, _wBoolF_7_
+	bne	$17, $0, _wBoolF_16_
+# was:	bne	_letBind_10_, $0, _wBoolF_16_
 	la	$2, _false
 # was:	la	$2, _false
-_wBoolF_7_:
+_wBoolF_16_:
 	jal	putstring
 # was:	jal	putstring, $2
 	ori	$2, $0, 1
-# was:	ori	_mainres_1_, $0, 1
-# 	ori	$2,_mainres_1_,0
-	addi	$29, $29, 8
+# was:	ori	_mainres_2_, $0, 1
+# 	ori	$2,_mainres_2_,0
+	addi	$29, $29, 16
+	lw	$17, -12($29)
+	lw	$16, -8($29)
 	lw	$31, -4($29)
 	jr	$31
 ord:
