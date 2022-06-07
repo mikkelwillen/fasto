@@ -75,9 +75,6 @@ let rec copyConstPropFoldExp (vtable : VarTable)
                                 `let x = e1 in let y = e2 in e3`
                                 let name2 = e2 in let name = e in body
                     *)
-                    // copyConstPropFoldExp (SymTab.bind name (
-                    //            Let (Dec (name2, e2, decpos2), b, pos)) vtable) body
-                    // copyConstPropFoldExp (Let (Dec (name, e, decpos),
                     copyConstPropFoldExp vtable (Let (Dec (name2, e2, decpos), 
                                                     Let (Dec (name, b, decpos2), 
                                                     body, 

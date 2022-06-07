@@ -157,21 +157,6 @@ let rec removeDeadBindingsInExp (e : TypedExp) : (bool * DBRtab * TypedExp) =
                  Let (Dec (name, e', decpos), body', pos))
             else
                 (bodyio, bodyuses, body')
-            // match (isUsed name bodyuses, eio) with
-            //     | (false, false) -> 
-            //         (false, SymTab.combine euses bodyuses', body')
-            //     | (false, true)  ->
-            //         (eio || bodyio,
-            //          SymTab.combine bodyuses' euses,
-            //          Let (Dec (name, e', decpos), body', pos))
-            //     | (_, _)          -> 
-            //         let tempStab = SymTab.remove name bodyuses
-            //         let tempStab2 = recordUse name tempStab
-            //         (eio || bodyio,
-            //          SymTab.combine tempStab2 euses,
-            //          Let (Dec (name, e', decpos), body', pos))
-            // der er stadig noget, som fucker, evt prøv at lav endnu et matchcase, 
-            // så der er en for hver
         | Iota (e, pos) ->
             let (io, uses, e') = removeDeadBindingsInExp e
             (io,
