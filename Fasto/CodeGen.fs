@@ -279,7 +279,19 @@ let rec compileExp  (e      : TypedExp)
       let t2 = newReg "divide_R"
       let code1 = compileExp e1 vtable t1
       let code2 = compileExp e2 vtable t2
-      code1 @ code2 @ [ Mips.DIV (place, t1, t2) ]
+      let divByZero = newLab "divByZero"
+      let endLab = newLab "endLab"
+      let line = match pos with
+                   | a, _ -> a
+      code1 @ code2 @ 
+      [ Mips.BEQ (t2, RZ, divByZero)
+      ; Mips.DIV (place, t1, t2)
+      ; Mips.J endLab
+      ; Mips.LABEL divByZero 
+      ; Mips.LI(RN5, line)
+      ; Mips.LA(RN6, "_Msg_DivZero_")
+      ; Mips.J "_RuntimeError_"
+      ; Mips.LABEL endLab]
 
   | Not (e, pos) ->
       let t = newReg "Not"

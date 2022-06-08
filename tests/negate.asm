@@ -66,17 +66,27 @@ main:
 # was:	ori	_divide_L_14_, $0, 3
 	ori	$3, $0, 2
 # was:	ori	_divide_R_15_, $0, 2
+	beq	$3, $0, _divByZero_16_
+# was:	beq	_divide_R_15_, $0, _divByZero_16_
 	div	$4, $2, $3
 # was:	div	_eq_L_12_, _divide_L_14_, _divide_R_15_
+	j	_endLab_17_
+_divByZero_16_:
+	ori	$5, $0, 7
+# was:	ori	$5, $0, 7
+	la	$6, _Msg_DivZero_
+# was:	la	$6, _Msg_DivZero_
+	j	_RuntimeError_
+_endLab_17_:
 	ori	$2, $0, 1
 # was:	ori	_eq_R_13_, $0, 1
 	ori	$3, $0, 0
 # was:	ori	_arg_11_, $0, 0
-	bne	$4, $2, _false_16_
-# was:	bne	_eq_L_12_, _eq_R_13_, _false_16_
+	bne	$4, $2, _false_18_
+# was:	bne	_eq_L_12_, _eq_R_13_, _false_18_
 	ori	$3, $0, 1
 # was:	ori	_arg_11_, $0, 1
-_false_16_:
+_false_18_:
 	ori	$2, $3, 0
 # was:	ori	$2, _arg_11_, 0
 	jal	write_nl
@@ -84,130 +94,160 @@ _false_16_:
 	ori	$18, $2, 0
 # was:	ori	_letBind_10_, $2, 0
 	ori	$3, $0, 0
-# was:	ori	_0_24_, $0, 0
-	ori	$2, $0, 3
-# was:	ori	_Negate_23_, $0, 3
-	sub	$2, $3, $2
-# was:	sub	_divide_L_21_, _0_24_, _Negate_23_
-	ori	$3, $0, 2
-# was:	ori	_divide_R_22_, $0, 2
-	div	$2, $2, $3
-# was:	div	_eq_L_19_, _divide_L_21_, _divide_R_22_
-	ori	$4, $0, 0
 # was:	ori	_0_26_, $0, 0
+	ori	$2, $0, 3
+# was:	ori	_Negate_25_, $0, 3
+	sub	$2, $3, $2
+# was:	sub	_divide_L_23_, _0_26_, _Negate_25_
 	ori	$3, $0, 2
-# was:	ori	_Negate_25_, $0, 2
-	sub	$3, $4, $3
-# was:	sub	_eq_R_20_, _0_26_, _Negate_25_
+# was:	ori	_divide_R_24_, $0, 2
+	beq	$3, $0, _divByZero_27_
+# was:	beq	_divide_R_24_, $0, _divByZero_27_
+	div	$2, $2, $3
+# was:	div	_eq_L_21_, _divide_L_23_, _divide_R_24_
+	j	_endLab_28_
+_divByZero_27_:
+	ori	$5, $0, 8
+# was:	ori	$5, $0, 8
+	la	$6, _Msg_DivZero_
+# was:	la	$6, _Msg_DivZero_
+	j	_RuntimeError_
+_endLab_28_:
 	ori	$4, $0, 0
-# was:	ori	_arg_18_, $0, 0
-	bne	$2, $3, _false_27_
-# was:	bne	_eq_L_19_, _eq_R_20_, _false_27_
+# was:	ori	_0_30_, $0, 0
+	ori	$3, $0, 2
+# was:	ori	_Negate_29_, $0, 2
+	sub	$3, $4, $3
+# was:	sub	_eq_R_22_, _0_30_, _Negate_29_
+	ori	$4, $0, 0
+# was:	ori	_arg_20_, $0, 0
+	bne	$2, $3, _false_31_
+# was:	bne	_eq_L_21_, _eq_R_22_, _false_31_
 	ori	$4, $0, 1
-# was:	ori	_arg_18_, $0, 1
-_false_27_:
+# was:	ori	_arg_20_, $0, 1
+_false_31_:
 	ori	$2, $4, 0
-# was:	ori	$2, _arg_18_, 0
+# was:	ori	$2, _arg_20_, 0
 	jal	write_nl
 # was:	jal	write_nl, $2
 	ori	$17, $2, 0
-# was:	ori	_letBind_17_, $2, 0
+# was:	ori	_letBind_19_, $2, 0
 	ori	$3, $0, 3
-# was:	ori	_divide_L_32_, $0, 3
+# was:	ori	_divide_L_36_, $0, 3
 	ori	$4, $0, 0
-# was:	ori	_0_35_, $0, 0
+# was:	ori	_0_39_, $0, 0
 	ori	$2, $0, 2
-# was:	ori	_Negate_34_, $0, 2
+# was:	ori	_Negate_38_, $0, 2
 	sub	$2, $4, $2
-# was:	sub	_divide_R_33_, _0_35_, _Negate_34_
+# was:	sub	_divide_R_37_, _0_39_, _Negate_38_
+	beq	$2, $0, _divByZero_40_
+# was:	beq	_divide_R_37_, $0, _divByZero_40_
 	div	$2, $3, $2
-# was:	div	_eq_L_30_, _divide_L_32_, _divide_R_33_
+# was:	div	_eq_L_34_, _divide_L_36_, _divide_R_37_
+	j	_endLab_41_
+_divByZero_40_:
+	ori	$5, $0, 9
+# was:	ori	$5, $0, 9
+	la	$6, _Msg_DivZero_
+# was:	la	$6, _Msg_DivZero_
+	j	_RuntimeError_
+_endLab_41_:
 	ori	$4, $0, 0
-# was:	ori	_0_37_, $0, 0
+# was:	ori	_0_43_, $0, 0
 	ori	$3, $0, 2
-# was:	ori	_Negate_36_, $0, 2
+# was:	ori	_Negate_42_, $0, 2
 	sub	$3, $4, $3
-# was:	sub	_eq_R_31_, _0_37_, _Negate_36_
+# was:	sub	_eq_R_35_, _0_43_, _Negate_42_
 	ori	$4, $0, 0
-# was:	ori	_arg_29_, $0, 0
-	bne	$2, $3, _false_38_
-# was:	bne	_eq_L_30_, _eq_R_31_, _false_38_
+# was:	ori	_arg_33_, $0, 0
+	bne	$2, $3, _false_44_
+# was:	bne	_eq_L_34_, _eq_R_35_, _false_44_
 	ori	$4, $0, 1
-# was:	ori	_arg_29_, $0, 1
-_false_38_:
+# was:	ori	_arg_33_, $0, 1
+_false_44_:
 	ori	$2, $4, 0
-# was:	ori	$2, _arg_29_, 0
+# was:	ori	$2, _arg_33_, 0
 	jal	write_nl
 # was:	jal	write_nl, $2
 	ori	$16, $2, 0
-# was:	ori	_letBind_28_, $2, 0
+# was:	ori	_letBind_32_, $2, 0
 	ori	$3, $0, 0
-# was:	ori	_0_46_, $0, 0
+# was:	ori	_0_52_, $0, 0
 	ori	$2, $0, 3
-# was:	ori	_Negate_45_, $0, 3
+# was:	ori	_Negate_51_, $0, 3
 	sub	$3, $3, $2
-# was:	sub	_divide_L_43_, _0_46_, _Negate_45_
+# was:	sub	_divide_L_49_, _0_52_, _Negate_51_
 	ori	$4, $0, 0
-# was:	ori	_0_48_, $0, 0
+# was:	ori	_0_54_, $0, 0
 	ori	$2, $0, 2
-# was:	ori	_Negate_47_, $0, 2
+# was:	ori	_Negate_53_, $0, 2
 	sub	$2, $4, $2
-# was:	sub	_divide_R_44_, _0_48_, _Negate_47_
+# was:	sub	_divide_R_50_, _0_54_, _Negate_53_
+	beq	$2, $0, _divByZero_55_
+# was:	beq	_divide_R_50_, $0, _divByZero_55_
 	div	$2, $3, $2
-# was:	div	_eq_L_41_, _divide_L_43_, _divide_R_44_
+# was:	div	_eq_L_47_, _divide_L_49_, _divide_R_50_
+	j	_endLab_56_
+_divByZero_55_:
+	ori	$5, $0, 10
+# was:	ori	$5, $0, 10
+	la	$6, _Msg_DivZero_
+# was:	la	$6, _Msg_DivZero_
+	j	_RuntimeError_
+_endLab_56_:
 	ori	$3, $0, 1
-# was:	ori	_eq_R_42_, $0, 1
+# was:	ori	_eq_R_48_, $0, 1
 	ori	$4, $0, 0
-# was:	ori	_arg_40_, $0, 0
-	bne	$2, $3, _false_49_
-# was:	bne	_eq_L_41_, _eq_R_42_, _false_49_
+# was:	ori	_arg_46_, $0, 0
+	bne	$2, $3, _false_57_
+# was:	bne	_eq_L_47_, _eq_R_48_, _false_57_
 	ori	$4, $0, 1
-# was:	ori	_arg_40_, $0, 1
-_false_49_:
+# was:	ori	_arg_46_, $0, 1
+_false_57_:
 	ori	$2, $4, 0
-# was:	ori	$2, _arg_40_, 0
+# was:	ori	$2, _arg_46_, 0
 	jal	write_nl
 # was:	jal	write_nl, $2
-# 	ori	_letBind_39_,$2,0
-# 	ori	_And_L_57_,_letBind_10_,0
+# 	ori	_letBind_45_,$2,0
+# 	ori	_And_L_65_,_letBind_10_,0
 	ori	$4, $0, 0
-# was:	ori	_falseReg_59_, $0, 0
+# was:	ori	_falseReg_67_, $0, 0
 	ori	$3, $0, 0
-# was:	ori	_And_L_54_, $0, 0
-	beq	$18, $4, _false_60_
-# was:	beq	_And_L_57_, _falseReg_59_, _false_60_
-# 	ori	_And_R_58_,_letBind_17_,0
-	beq	$17, $4, _false_60_
-# was:	beq	_And_R_58_, _falseReg_59_, _false_60_
+# was:	ori	_And_L_62_, $0, 0
+	beq	$18, $4, _false_68_
+# was:	beq	_And_L_65_, _falseReg_67_, _false_68_
+# 	ori	_And_R_66_,_letBind_19_,0
+	beq	$17, $4, _false_68_
+# was:	beq	_And_R_66_, _falseReg_67_, _false_68_
 	ori	$3, $0, 1
-# was:	ori	_And_L_54_, $0, 1
-_false_60_:
+# was:	ori	_And_L_62_, $0, 1
+_false_68_:
 	ori	$5, $0, 0
-# was:	ori	_falseReg_56_, $0, 0
+# was:	ori	_falseReg_64_, $0, 0
 	ori	$4, $0, 0
-# was:	ori	_And_L_51_, $0, 0
-	beq	$3, $5, _false_61_
-# was:	beq	_And_L_54_, _falseReg_56_, _false_61_
-# 	ori	_And_R_55_,_letBind_28_,0
-	beq	$16, $5, _false_61_
-# was:	beq	_And_R_55_, _falseReg_56_, _false_61_
+# was:	ori	_And_L_59_, $0, 0
+	beq	$3, $5, _false_69_
+# was:	beq	_And_L_62_, _falseReg_64_, _false_69_
+# 	ori	_And_R_63_,_letBind_32_,0
+	beq	$16, $5, _false_69_
+# was:	beq	_And_R_63_, _falseReg_64_, _false_69_
 	ori	$4, $0, 1
-# was:	ori	_And_L_51_, $0, 1
-_false_61_:
+# was:	ori	_And_L_59_, $0, 1
+_false_69_:
 	ori	$3, $0, 0
-# was:	ori	_falseReg_53_, $0, 0
+# was:	ori	_falseReg_61_, $0, 0
 	ori	$5, $0, 0
-# was:	ori	_arg_50_, $0, 0
-	beq	$4, $3, _false_62_
-# was:	beq	_And_L_51_, _falseReg_53_, _false_62_
-# 	ori	_And_R_52_,_letBind_39_,0
-	beq	$2, $3, _false_62_
-# was:	beq	_And_R_52_, _falseReg_53_, _false_62_
+# was:	ori	_arg_58_, $0, 0
+	beq	$4, $3, _false_70_
+# was:	beq	_And_L_59_, _falseReg_61_, _false_70_
+# 	ori	_And_R_60_,_letBind_45_,0
+	beq	$2, $3, _false_70_
+# was:	beq	_And_R_60_, _falseReg_61_, _false_70_
 	ori	$5, $0, 1
-# was:	ori	_arg_50_, $0, 1
-_false_62_:
+# was:	ori	_arg_58_, $0, 1
+_false_70_:
 	ori	$2, $5, 0
-# was:	ori	$2, _arg_50_, 0
+# was:	ori	$2, _arg_58_, 0
 	jal	write_nl
 # was:	jal	write_nl, $2
 # 	ori	_mainres_9_,$2,0
