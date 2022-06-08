@@ -343,9 +343,9 @@ let rec evalExp (e : UntypedExp, vtab : VarTable, ftab : FunTable) : Value =
         let arr  = evalExp(arrexp, vtab, ftab)
         let nel  = evalExp(ne, vtab, ftab)
         match arr with
-          | ArrayVal (lst,tp1) ->
+          | ArrayVal (lst, tp1) ->
                let mlst = List.scan (fun acc x -> evalFunArg (farg, vtab, ftab, pos, [acc;x])) nel lst
-               ArrayVal(mlst, farg_ret_type)
+               ArrayVal(mlst[1..mlst.Length], farg_ret_type)
           | otherwise -> reportNonArray "3rd argument of \"reduce\"" arr pos
 
   | Read (t,p) ->
