@@ -149,7 +149,7 @@ and checkExp  (ftab : FunTable)
         let (t, e') = checkExp ftab vtab e
         if t <> Bool then
           reportTypeWrong "argument of negate" Bool t pos
-        (Int, Negate (e', pos))
+        (Bool, Not (e', pos))
 
     | Negate (e, pos) ->
         let (t, e') = checkExp ftab vtab e

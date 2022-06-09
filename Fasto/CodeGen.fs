@@ -663,10 +663,6 @@ let rec compileExp  (e      : TypedExp)
       let tmp_reg = newReg "tmp_reg"
       let dst_size = getElemSize tp
 
-      let get_size = [ Mips.MOVE (tmp_reg, RZ)
-                     ; Mips.ADDI (tmp_reg, tmp_reg, elemSizeToInt dst_size)
-                     ; Mips.MUL (size_reg, n_reg, tmp_reg) ]
-
       let init_regs = [ Mips.ADDI (res_reg, place, 4)
                       ; Mips.MOVE (i_reg, RZ) 
                       ; Mips.ADDI (elem_reg, a_reg, 0) ]
@@ -688,8 +684,7 @@ let rec compileExp  (e      : TypedExp)
               ; Mips.LABEL loop_end ]
 
       n_code @ a_code
-      @ get_size 
-      @ dynalloc (size_reg, place, tp)
+      @ dynalloc (n_reg, place, tp)
       @ init_regs
       @ loop_header
       @ loop_body
