@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/mikkel/Dokumenter/fasto/Fasto/Fasto.fsproj": {}
+    "/home/mikkel/Documents/fasto/Fasto/Fasto.fsproj": {}
   },
   "projects": {
-    "/home/mikkel/Dokumenter/fasto/Fasto/Fasto.fsproj": {
+    "/home/mikkel/Documents/fasto/Fasto/Fasto.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mikkel/Dokumenter/fasto/Fasto/Fasto.fsproj",
+        "projectUniqueName": "/home/mikkel/Documents/fasto/Fasto/Fasto.fsproj",
         "projectName": "Fasto",
-        "projectPath": "/home/mikkel/Dokumenter/fasto/Fasto/Fasto.fsproj",
+        "projectPath": "/home/mikkel/Documents/fasto/Fasto/Fasto.fsproj",
         "packagesPath": "/home/mikkel/.nuget/packages/",
-        "outputPath": "/home/mikkel/Dokumenter/fasto/Fasto/obj/",
+        "outputPath": "/home/mikkel/Documents/fasto/Fasto/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/mikkel/.nuget/NuGet/NuGet.Config"
@@ -20,7 +20,6 @@
           "net6.0"
         ],
         "sources": {
-          "/usr/share/dotnet/sdk/6.0.300/FSharp/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -37,7 +36,7 @@
             "FSharp.Core": {
               "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
               "target": "Package",
-              "version": "[6.0.4, )",
+              "version": "[6.0.1, )",
               "generatePathProperty": true
             },
             "FsLexYacc": {
@@ -61,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/dotnet6-6.0.110/sdk/6.0.110/RuntimeIdentifierGraph.json"
         }
       }
     }
